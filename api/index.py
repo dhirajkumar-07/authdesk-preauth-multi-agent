@@ -10,27 +10,7 @@ if os.path.exists(kit_dir) and kit_dir not in sys.path:
     sys.path.insert(0, kit_dir)
 
 try:
-    from app.main import app as _app
-
-    # ASGI middleware to normalize paths rewritten by Vercel
-    class PathNormalizer:
-        def __init__(self, asgi_app):
-            self.asgi_app = asgi_app
-
-        async def __call__(self, scope, receive, send):
-            if scope.get("type") in ("http", "websocket"):
-                path = scope.get("path", "/")
-                for prefix in ("/api/index.py", "/api/index", "/api"):
-                    if path == prefix:
-                        scope["path"] = "/"
-                        break
-                    elif path.startswith(prefix + "/"):
-                        scope["path"] = path[len(prefix):]
-                        break
-            await self.asgi_app(scope, receive, send)
-
-    app = PathNormalizer(_app)
-
+    from app.main import app
 except Exception as e:
     from fastapi import FastAPI
     from fastapi.responses import JSONResponse
