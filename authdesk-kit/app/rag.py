@@ -3,7 +3,13 @@ Two collections: plan_docs and guidelines. Swap in ChromaDB later if you want; t
 import re, math, glob, os
 from collections import Counter
 
-DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
+_data_candidates = [
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data"),
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "authdesk-kit", "data"),
+    os.path.join(os.getcwd(), "data"),
+    os.path.join(os.getcwd(), "authdesk-kit", "data"),
+]
+DATA = next((p for p in _data_candidates if os.path.exists(p) and os.path.isdir(p)), _data_candidates[0])
 CLAUSE = re.compile(r"^((?:PLAN|GL)(?:-[A-Z]+)?-\d+\.\d+)\s+(.+)$")
 tok = lambda s: re.findall(r"[a-z0-9]+", s.lower())
 

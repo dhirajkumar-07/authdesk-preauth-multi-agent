@@ -18,4 +18,9 @@ def log(c, agent, action):
 
 def save():
     try: json.dump(STORE, open(PATH, "w"), indent=1)
-    except OSError: pass
+    except OSError:
+        try:
+            tmp_path = os.path.join("/tmp", "cases.json")
+            json.dump(STORE, open(tmp_path, "w"), indent=1)
+        except OSError:
+            pass

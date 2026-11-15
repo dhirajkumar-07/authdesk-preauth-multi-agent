@@ -1,0 +1,144 @@
+[
+  {
+    "id": "TC01",
+    "request": "Request MRI lumbar spine for patient P-1001. Diagnosis: chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy. Provider: Dr. Rao, City Ortho (in-network).",
+    "expected_decision": "APPROVE",
+    "expected_clauses": [
+      "PLAN-2.1",
+      "PLAN-7.1",
+      "GL-MRI-3.1"
+    ]
+  },
+  {
+    "id": "TC02",
+    "request": "Request total knee replacement for P-1002. Diagnosis: severe knee osteoarthritis, 4 months of failed conservative treatment, significant walking impairment. Provider: Dr. Mehta, Apex Hospital (in-network).",
+    "expected_decision": "APPROVE",
+    "expected_clauses": [
+      "PLAN-2.2",
+      "GL-TKR-4.1"
+    ]
+  },
+  {
+    "id": "TC03",
+    "request": "Request chemotherapy for P-1003. Diagnosis: biopsy-confirmed breast cancer. Written oncologist treatment plan attached. Provider: Dr. Singh, Cancer Care Centre (in-network).",
+    "expected_decision": "APPROVE",
+    "expected_clauses": [
+      "PLAN-3.1",
+      "GL-ONC-6.1"
+    ]
+  },
+  {
+    "id": "TC04",
+    "request": "Request bariatric surgery for P-1004. Diagnosis: obesity, BMI 42, 12 months of documented supervised diet programme. Provider: Dr. Kapoor, Metro Surgical (in-network).",
+    "expected_decision": "APPROVE",
+    "expected_clauses": [
+      "PLAN-2.4",
+      "GL-BAR-5.1"
+    ]
+  },
+  {
+    "id": "TC05",
+    "request": "Request rhinoplasty for P-1005 to improve nose shape. No breathing problems or injury reported. Provider: Dr. Sen, Glow Clinic (in-network).",
+    "expected_decision": "DENY",
+    "expected_clauses": [
+      "PLAN-4.1"
+    ]
+  },
+  {
+    "id": "TC06",
+    "request": "Request experimental stem-cell injection for knee osteoarthritis for P-1006. Treatment is investigational and not yet approved. Provider: Dr. Das, Regen Labs (in-network).",
+    "expected_decision": "DENY",
+    "expected_clauses": [
+      "PLAN-4.2"
+    ]
+  },
+  {
+    "id": "TC07",
+    "request": "Request MRI lumbar spine for P-1007. Diagnosis: low back pain for 2 weeks, no weakness, numbness or other red flags, no prior treatment tried. Provider: Dr. Rao, City Ortho (in-network).",
+    "expected_decision": "DENY",
+    "expected_clauses": [
+      "PLAN-2.1",
+      "GL-MRI-3.2"
+    ]
+  },
+  {
+    "id": "TC08",
+    "request": "Request knee arthroscopy for P-1008. Diagnosis: degenerative knee osteoarthritis only, no meniscal tear or mechanical symptoms. Provider: Dr. Mehta, Apex Hospital (in-network).",
+    "expected_decision": "DENY",
+    "expected_clauses": [
+      "PLAN-2.2",
+      "GL-KNEE-2.1"
+    ]
+  },
+  {
+    "id": "TC09",
+    "request": "Request knee surgery for P-1009. Diagnosis: knee pain. No imaging results, no history of conservative treatment provided. Provider: Dr. Mehta, Apex Hospital (in-network).",
+    "expected_decision": "MORE_INFO",
+    "expected_clauses": [
+      "PLAN-7.2",
+      "GL-KNEE-2.1"
+    ]
+  },
+  {
+    "id": "TC10",
+    "request": "Request CT head scan for P-1010 after a fall. No details on symptoms, loss of consciousness or medication use. Provider: Dr. Iyer, City Emergency Clinic (in-network).",
+    "expected_decision": "MORE_INFO",
+    "expected_clauses": [
+      "PLAN-7.2",
+      "GL-CT-8.1"
+    ]
+  },
+  {
+    "id": "TC11",
+    "request": "Request MRI brain for patient P-1011. Diagnosis: chronic migraine. Provider: Dr. Vance, Valley Imaging Centre (out-of-network). Non-emergency referral.",
+    "expected_decision": "DENY",
+    "expected_clauses": [
+      "PLAN-4.3"
+    ]
+  },
+  {
+    "id": "TC12",
+    "request": "Request physiotherapy for patient P-1012 following rotator cuff repair surgery. Documented functional deficit with restricted shoulder range of motion. Physician referral attached. Provider: Dr. Alva, City Physical Therapy (in-network).",
+    "expected_decision": "APPROVE",
+    "expected_clauses": [
+      "PLAN-2.3",
+      "GL-PT-7.1"
+    ]
+  },
+  {
+    "id": "TC13",
+    "request": "Request MRI lumbar spine for patient P-1013. Diagnosis: persistent low back pain lasting exactly 6 weeks, failed 6 weeks of conservative therapy and medications. Provider: Dr. Rao, City Ortho (in-network).",
+    "expected_decision": "APPROVE",
+    "expected_clauses": [
+      "PLAN-2.1",
+      "GL-MRI-3.1"
+    ]
+  },
+  {
+    "id": "TC14",
+    "request": "Request CT head scan for patient P-1014 following fall and head trauma. Documented loss of consciousness for 5 minutes and repeated vomiting. Provider: Dr. Iyer, City Emergency Clinic (in-network).",
+    "expected_decision": "APPROVE",
+    "expected_clauses": [
+      "PLAN-2.1",
+      "GL-CT-8.1"
+    ]
+  },
+  {
+    "id": "TC15",
+    "request": "Request bariatric surgery for patient P-1015. Diagnosis: obesity with measured BMI 36. Patient has no type 2 diabetes, hypertension, sleep apnea, or other severe comorbidities. Provider: Dr. Kapoor, Metro Surgical (in-network).",
+    "expected_decision": "DENY",
+    "expected_clauses": [
+      "PLAN-2.4",
+      "GL-BAR-5.1"
+    ]
+  },
+  {
+    "id": "TC16",
+    "request": "pt p1016 need urgent chemmotherapy breast tumur biopsy proven positive dr singhh cancer clinic innetwork plan attached",
+    "expected_decision": "APPROVE",
+    "expected_clauses": [
+      "PLAN-3.1",
+      "GL-ONC-6.1"
+    ]
+  }
+]
