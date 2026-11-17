@@ -1979,7 +1979,19 @@
       try {
         const c = await api('/cases/' + id);
         showCase(c, false);
-      } catch (e) {}
+      } catch (e) {
+        toast(`Case #${id} not found in current session. Loading latest case...`);
+        try {
+          const cases = await api('/cases');
+          if (cases && cases.length > 0) {
+            showCase(cases[0], false);
+          } else {
+            go('new');
+          }
+        } catch (err) {
+          go('new');
+        }
+      }
     }
 
     const AGENTS_META = [
@@ -2104,7 +2116,7 @@
         setStep(1);
         startAutoPlay();
       } else {
-        setStep(7);
+        setStep(1);
       }
     }
 
@@ -2562,14 +2574,27 @@
             <div class="agent-box">
               <div class="agent-box-title">📤 Outputs Generated: Formal Determination Notice</div>
               ${c.letter ? `
-                <textarea class="letter-box" id="lt">${esc(c.letter)}</textarea>
-                <div style="margin-top:10px; display:flex; gap:10px;">
+                <textarea class="letter-box" id="lt" rows="10">${esc(c.letter)}</textarea>
+                <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
                   <button class="btn sm" onclick="navigator.clipboard.writeText($('lt').value); toast('Letter copied to clipboard');">📋 Copy Letter</button>
                   <button class="btn ghost sm" onclick="downloadLetter('${c.case_id}')">💾 Download .txt</button>
                 </div>
               ` : `
-                <div class="warn-banner">
-                  The determination letter will be drafted automatically once clinical peer review is concluded.
+                <div class="warn-banner" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                  <div>
+                    <b>⚠️ Adverse Determination Notice Pending Peer Review (PLAN-7.3):</b>
+                    <div style="font-size:12px; margin-top:2px;">Under utilization management policy, sign off below to finalize the formal letter, or download the provisional draft.</div>
+                  </div>
+                  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="btn sm" onclick="submitInStepReview('${c.case_id}', 'UPHOLD')">🛡️ Sign Off: Uphold ${c.ai_decision}</button>
+                    <button class="btn ghost sm" onclick="submitInStepReview('${c.case_id}', 'OVERTURN')">⚡ Overturn to Approval</button>
+                  </div>
+                </div>
+                <div style="font-size:12px; color:var(--cyan); font-weight:700; margin-bottom:4px;">PROVISIONAL DETERMINATION NOTICE DRAFT:</div>
+                <textarea class="letter-box" id="lt" rows="10">${esc(generateProvisionalLetter(c))}</textarea>
+                <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+                  <button class="btn sm" onclick="navigator.clipboard.writeText($('lt').value); toast('Draft copied to clipboard');">📋 Copy Draft</button>
+                  <button class="btn ghost sm" onclick="downloadLetter('${c.case_id}')">💾 Download .txt</button>
                 </div>
               `}
             </div>
@@ -2642,14 +2667,19 @@
               <div class="agent-box-title">✉️ Final Determination Notice Letter</div>
               ${c.letter ? `
                 <textarea class="letter-box" id="lt" rows="8">${esc(c.letter)}</textarea>
-                <div style="margin-top:10px; display:flex; gap:10px;">
+                <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
                   <button class="btn sm" onclick="navigator.clipboard.writeText($('lt').value); toast('Letter copied to clipboard');">📋 Copy Letter</button>
-                  <button class="btn ghost sm" onclick="downloadLetter('${c.case_id}')">💾 Download .txt</button>
+                  <button class="btn ghost sm" onclick="downloadLetter('${c.case_id}')">💾 Download Letter (.txt)</button>
+                  <button class="btn ghost sm" onclick="downloadDossier('${c.case_id}')">📦 Export Full Dossier (.json)</button>
                 </div>
               ` : `
-                <p style="font-size:13px; color:var(--t); background:rgba(255,255,255,0.02); padding:12px; border-radius:8px;">
-                  The decision notice letter is drafted after clinical peer review is complete.
-                </p>
+                <div style="font-size:12px; color:var(--cyan); font-weight:700; margin-bottom:4px;">PROVISIONAL DETERMINATION NOTICE DRAFT (PENDING SIGN-OFF):</div>
+                <textarea class="letter-box" id="lt" rows="8">${esc(generateProvisionalLetter(c))}</textarea>
+                <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+                  <button class="btn sm" onclick="navigator.clipboard.writeText($('lt').value); toast('Draft copied to clipboard');">📋 Copy Draft</button>
+                  <button class="btn ghost sm" onclick="downloadLetter('${c.case_id}')">💾 Download Draft (.txt)</button>
+                  <button class="btn ghost sm" onclick="downloadDossier('${c.case_id}')">📦 Export Full Dossier (.json)</button>
+                </div>
               `}
             </div>
 
@@ -2720,11 +2750,62 @@
     }
 
     function downloadLetter(cid) {
-      const txt = $('lt').value;
+      const el = $('lt');
+      const c = window._activeCase || {};
+      const txt = (el && el.value) ? el.value : (c.letter || generateProvisionalLetter(c));
+      if (!txt) return toast('No letter content to download.');
+      const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob([txt], { type: 'text/plain' }));
-      a.download = `decision_letter_${cid}.txt`;
+      a.href = URL.createObjectURL(blob);
+      a.download = `decision_letter_${cid || c.case_id || 'authdesk'}.txt`;
+      document.body.appendChild(a);
       a.click();
+      setTimeout(() => {
+        try { document.body.removeChild(a); } catch (e) {}
+      }, 200);
+      toast(`Downloaded decision_letter_${cid || c.case_id || 'authdesk'}.txt`);
+    }
+
+    function downloadDossier(cid) {
+      const c = window._activeCase;
+      if (!c) return toast('No active case loaded.');
+      const blob = new Blob([JSON.stringify(c, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `case_dossier_${cid || c.case_id}.json`;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        try { document.body.removeChild(a); } catch (e) {}
+      }, 200);
+      toast(`Exported case_dossier_${cid || c.case_id}.json`);
+    }
+
+    function generateProvisionalLetter(c) {
+      if (!c) return '';
+      const p = c.parsed || {};
+      const cov = c.coverage_findings || {};
+      const nec = c.necessity_findings || {};
+      const clauses = (c.cited_clauses || []).join(', ') || 'PLAN-7.1';
+      const dec = c.decision || c.ai_decision || 'DENY';
+      return `================================================================================
+AUTHDESK DETERMINATION NOTICE [PROVISIONAL DRAFT - PENDING CLINICAL REVIEW]
+Case ID: ${c.case_id || 'N/A'} | Date: ${c.created || 'N/A'}
+Patient: ${p.patient || 'P-1001'} | Plan: Gold-500 Comprehensive | Provider: ${p.provider || 'Clinical Provider'}
+Requested Procedure: ${p.treatment || 'Medical Treatment'}
+Clinical Indication: ${p.diagnosis || 'Clinical Diagnosis'}
+================================================================================
+
+TENTATIVE DETERMINATION: ${dec} (Awaiting Licensed Clinician Sign-Off)
+Applicable Benefit / Clinical Clauses: ${clauses}
+
+CLINICAL RATIONALE:
+${cov.reason || 'Evaluated against benefit agreement.'}
+${nec.reason || 'Evaluated against evidence-based clinical guidelines.'}
+
+NOTICE: Under Policy PLAN-7.3, this adverse determination is held for physician peer-review.
+The formal determination notice will be locked upon clinical sign-off.
+================================================================================`;
     }
 
     // Review Queue

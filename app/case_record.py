@@ -2,6 +2,20 @@
 import json, os, uuid, datetime
 STORE = {}
 PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "cases.json")
+
+# Persistent storage: load existing cases from disk on startup
+if os.path.exists(PATH):
+    try:
+        with open(PATH, "r", encoding="utf-8") as _f:
+            _disk_cases = json.load(_f)
+            if isinstance(_disk_cases, dict):
+                STORE.update(_disk_cases)
+            elif isinstance(_disk_cases, list):
+                for _c in _disk_cases:
+                    if isinstance(_c, dict) and "case_id" in _c:
+                        STORE[_c["case_id"]] = _c
+    except Exception:
+        pass
 now = lambda: datetime.datetime.now().isoformat(timespec="seconds")
 
 def new_case(raw):
