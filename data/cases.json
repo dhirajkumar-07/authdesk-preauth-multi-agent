@@ -257,5 +257,2071 @@
     "timestamp": "2026-11-18T00:44:32"
    }
   ]
+ },
+ "afbf4505": {
+  "case_id": "afbf4505",
+  "created": "2026-11-18T00:45:51",
+  "raw_request": "Request MRI lumbar spine for patient P-1001. Diagnosis: chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy. Provider: Dr. Rao, City Ortho (in-network). Plan: Gold-500.",
+  "status": "COMPLETED",
+  "parsed": {
+   "patient": "P-1001",
+   "treatment": "MRI lumbar spine",
+   "diagnosis": "chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy",
+   "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+  },
+  "coverage_findings": {
+   "status": "COVERED_PRIOR_AUTH",
+   "clauses": [
+    "PLAN-2.1",
+    "PLAN-7.1"
+   ],
+   "reason": "Covered service; prior authorisation required.",
+   "retrieved": [
+    {
+     "clause_id": "PLAN-2.1",
+     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+     "score": 0.274
+    },
+    {
+     "clause_id": "PLAN-4.3",
+     "text": "Services from out-of-network providers are excluded except in emergencies.",
+     "score": 0.19
+    },
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.171
+    },
+    {
+     "clause_id": "PLAN-7.2",
+     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+     "score": 0.118
+    }
+   ],
+   "confidence": 0.9
+  },
+  "necessity_findings": {
+   "status": "MET",
+   "clauses": [
+    "GL-MRI-3.1"
+   ],
+   "reason": "Pain persisted 6+ weeks or red flags present.",
+   "retrieved": [
+    {
+     "clause_id": "GL-MRI-3.2",
+     "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+     "score": 0.42
+    },
+    {
+     "clause_id": "GL-MRI-3.1",
+     "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+     "score": 0.333
+    },
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.2
+    },
+    {
+     "clause_id": "GL-KNEE-2.2",
+     "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+     "score": 0.143
+    }
+   ],
+   "confidence": 0.85
+  },
+  "decision": "APPROVE",
+  "ai_decision": "APPROVE",
+  "confidence": 0.9,
+  "cited_clauses": [
+   "PLAN-2.1",
+   "PLAN-7.1",
+   "GL-MRI-3.1"
+  ],
+  "clause_text": {
+   "PLAN-2.1": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+   "GL-MRI-3.1": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication)."
+  },
+  "human_review": {
+   "required": false,
+   "reviewer": null,
+   "verdict": null,
+   "notes": null
+  },
+  "letter": "Re: Pre-authorisation request, patient P-1001 (Case afbf4505)\nProvider: Dr. Rao, City Ortho (in-network). Plan: Gold-500\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for MRI lumbar spine has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+  "audit_log": [
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:45:51",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
+    "agent": "Request Parser",
+    "timestamp": "2026-11-18T00:45:51",
+    "action": "Structured request: MRI lumbar spine"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:45:51",
+    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
+   },
+   {
+    "agent": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:45:51",
+    "action": "COVERED_PRIOR_AUTH: PLAN-2.1, PLAN-7.1"
+   },
+   {
+    "agent": "Medical Necessity",
+    "timestamp": "2026-11-18T00:45:51",
+    "action": "MET: GL-MRI-3.1"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:45:51",
+    "action": "FAN-IN: merging coverage and necessity findings"
+   },
+   {
+    "agent": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:45:51",
+    "action": "APPROVE (confidence 0.9) citing PLAN-2.1, PLAN-7.1, GL-MRI-3.1"
+   },
+   {
+    "agent": "Letter Drafter",
+    "timestamp": "2026-11-18T00:45:51",
+    "action": "Drafted APPROVE letter"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1001",
+     "treatment": "MRI lumbar spine",
+     "diagnosis": "chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy",
+     "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:45:51"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "COVERED_PRIOR_AUTH",
+     "clauses": [
+      "PLAN-2.1",
+      "PLAN-7.1"
+     ],
+     "reason": "Covered service; prior authorisation required.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-2.1",
+       "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+       "score": 0.274
+      },
+      {
+       "clause_id": "PLAN-4.3",
+       "text": "Services from out-of-network providers are excluded except in emergencies.",
+       "score": 0.19
+      },
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.171
+      },
+      {
+       "clause_id": "PLAN-7.2",
+       "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+       "score": 0.118
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:45:51"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "MET",
+     "clauses": [
+      "GL-MRI-3.1"
+     ],
+     "reason": "Pain persisted 6+ weeks or red flags present.",
+     "retrieved": [
+      {
+       "clause_id": "GL-MRI-3.2",
+       "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+       "score": 0.42
+      },
+      {
+       "clause_id": "GL-MRI-3.1",
+       "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+       "score": 0.333
+      },
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.2
+      },
+      {
+       "clause_id": "GL-KNEE-2.2",
+       "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+       "score": 0.143
+      }
+     ],
+     "confidence": 0.85
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:45:51"
+   },
+   {
+    "field": "decision",
+    "value": "APPROVE",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:45:51"
+   },
+   {
+    "field": "ai_decision",
+    "value": "APPROVE",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:45:51"
+   },
+   {
+    "field": "confidence",
+    "value": 0.9,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:45:51"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-2.1",
+     "PLAN-7.1",
+     "GL-MRI-3.1"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:45:51"
+   },
+   {
+    "field": "status",
+    "value": "COMPLETED",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:45:51"
+   },
+   {
+    "field": "letter",
+    "value": "Re: Pre-authorisation request, patient P-1001 (Case afbf4505)\nProvider: Dr. Rao, City Ortho (in-network). Plan: Gold-500\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for MRI lumbar spine has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+    "written_by": "Letter Drafter",
+    "timestamp": "2026-11-18T00:45:51"
+   }
+  ]
+ },
+ "9f0e5a9c": {
+  "case_id": "9f0e5a9c",
+  "created": "2026-11-18T00:49:28",
+  "raw_request": "Request MRI lumbar spine for patient P-1001. Diagnosis: chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy. Provider: Dr. Rao, City Ortho (in-network). Plan: Gold-500.",
+  "status": "COMPLETED",
+  "parsed": {
+   "patient": "P-1001",
+   "treatment": "MRI lumbar spine",
+   "diagnosis": "chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy",
+   "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+  },
+  "coverage_findings": {
+   "status": "COVERED_PRIOR_AUTH",
+   "clauses": [
+    "PLAN-2.1",
+    "PLAN-7.1"
+   ],
+   "reason": "Covered service; prior authorisation required.",
+   "retrieved": [
+    {
+     "clause_id": "PLAN-2.1",
+     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+     "score": 0.274
+    },
+    {
+     "clause_id": "PLAN-4.3",
+     "text": "Services from out-of-network providers are excluded except in emergencies.",
+     "score": 0.19
+    },
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.171
+    },
+    {
+     "clause_id": "PLAN-7.2",
+     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+     "score": 0.118
+    }
+   ],
+   "confidence": 0.9
+  },
+  "necessity_findings": {
+   "status": "MET",
+   "clauses": [
+    "GL-MRI-3.1"
+   ],
+   "reason": "Pain persisted 6+ weeks or red flags present.",
+   "retrieved": [
+    {
+     "clause_id": "GL-MRI-3.2",
+     "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+     "score": 0.42
+    },
+    {
+     "clause_id": "GL-MRI-3.1",
+     "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+     "score": 0.333
+    },
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.2
+    },
+    {
+     "clause_id": "GL-KNEE-2.2",
+     "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+     "score": 0.143
+    }
+   ],
+   "confidence": 0.85
+  },
+  "decision": "APPROVE",
+  "ai_decision": "APPROVE",
+  "confidence": 0.9,
+  "cited_clauses": [
+   "PLAN-2.1",
+   "PLAN-7.1",
+   "GL-MRI-3.1"
+  ],
+  "clause_text": {
+   "PLAN-2.1": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+   "GL-MRI-3.1": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication)."
+  },
+  "human_review": {
+   "required": false,
+   "reviewer": null,
+   "verdict": null,
+   "notes": null
+  },
+  "letter": "Re: Pre-authorisation request, patient P-1001 (Case 9f0e5a9c)\nProvider: Dr. Rao, City Ortho (in-network). Plan: Gold-500\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for MRI lumbar spine has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+  "audit_log": [
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:49:28",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
+    "agent": "Request Parser",
+    "timestamp": "2026-11-18T00:49:28",
+    "action": "Structured request: MRI lumbar spine"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:49:28",
+    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
+   },
+   {
+    "agent": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:49:28",
+    "action": "COVERED_PRIOR_AUTH: PLAN-2.1, PLAN-7.1"
+   },
+   {
+    "agent": "Medical Necessity",
+    "timestamp": "2026-11-18T00:49:28",
+    "action": "MET: GL-MRI-3.1"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:49:28",
+    "action": "FAN-IN: merging coverage and necessity findings"
+   },
+   {
+    "agent": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:49:28",
+    "action": "APPROVE (confidence 0.9) citing PLAN-2.1, PLAN-7.1, GL-MRI-3.1"
+   },
+   {
+    "agent": "Letter Drafter",
+    "timestamp": "2026-11-18T00:49:28",
+    "action": "Drafted APPROVE letter"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1001",
+     "treatment": "MRI lumbar spine",
+     "diagnosis": "chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy",
+     "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:49:28"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "COVERED_PRIOR_AUTH",
+     "clauses": [
+      "PLAN-2.1",
+      "PLAN-7.1"
+     ],
+     "reason": "Covered service; prior authorisation required.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-2.1",
+       "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+       "score": 0.274
+      },
+      {
+       "clause_id": "PLAN-4.3",
+       "text": "Services from out-of-network providers are excluded except in emergencies.",
+       "score": 0.19
+      },
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.171
+      },
+      {
+       "clause_id": "PLAN-7.2",
+       "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+       "score": 0.118
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:49:28"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "MET",
+     "clauses": [
+      "GL-MRI-3.1"
+     ],
+     "reason": "Pain persisted 6+ weeks or red flags present.",
+     "retrieved": [
+      {
+       "clause_id": "GL-MRI-3.2",
+       "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+       "score": 0.42
+      },
+      {
+       "clause_id": "GL-MRI-3.1",
+       "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+       "score": 0.333
+      },
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.2
+      },
+      {
+       "clause_id": "GL-KNEE-2.2",
+       "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+       "score": 0.143
+      }
+     ],
+     "confidence": 0.85
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:49:28"
+   },
+   {
+    "field": "decision",
+    "value": "APPROVE",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:49:28"
+   },
+   {
+    "field": "ai_decision",
+    "value": "APPROVE",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:49:28"
+   },
+   {
+    "field": "confidence",
+    "value": 0.9,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:49:28"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-2.1",
+     "PLAN-7.1",
+     "GL-MRI-3.1"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:49:28"
+   },
+   {
+    "field": "status",
+    "value": "COMPLETED",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:49:28"
+   },
+   {
+    "field": "letter",
+    "value": "Re: Pre-authorisation request, patient P-1001 (Case 9f0e5a9c)\nProvider: Dr. Rao, City Ortho (in-network). Plan: Gold-500\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for MRI lumbar spine has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+    "written_by": "Letter Drafter",
+    "timestamp": "2026-11-18T00:49:28"
+   }
+  ]
+ },
+ "a42a5a78": {
+  "case_id": "a42a5a78",
+  "created": "2026-11-18T00:51:37",
+  "raw_request": "Request MRI lumbar spine for patient P-1001. Diagnosis: chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy. Provider: Dr. Rao, City Ortho (in-network). Plan: Gold-500.",
+  "status": "COMPLETED",
+  "parsed": {
+   "patient": "P-1001",
+   "treatment": "MRI lumbar spine",
+   "diagnosis": "chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy",
+   "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+  },
+  "coverage_findings": {
+   "status": "COVERED_PRIOR_AUTH",
+   "clauses": [
+    "PLAN-2.1",
+    "PLAN-7.1"
+   ],
+   "reason": "Covered service; prior authorisation required.",
+   "retrieved": [
+    {
+     "clause_id": "PLAN-2.1",
+     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+     "score": 0.274
+    },
+    {
+     "clause_id": "PLAN-4.3",
+     "text": "Services from out-of-network providers are excluded except in emergencies.",
+     "score": 0.19
+    },
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.171
+    },
+    {
+     "clause_id": "PLAN-7.2",
+     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+     "score": 0.118
+    }
+   ],
+   "confidence": 0.9
+  },
+  "necessity_findings": {
+   "status": "MET",
+   "clauses": [
+    "GL-MRI-3.1"
+   ],
+   "reason": "Pain persisted 6+ weeks or red flags present.",
+   "retrieved": [
+    {
+     "clause_id": "GL-MRI-3.2",
+     "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+     "score": 0.42
+    },
+    {
+     "clause_id": "GL-MRI-3.1",
+     "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+     "score": 0.333
+    },
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.2
+    },
+    {
+     "clause_id": "GL-KNEE-2.2",
+     "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+     "score": 0.143
+    }
+   ],
+   "confidence": 0.85
+  },
+  "decision": "APPROVE",
+  "ai_decision": "APPROVE",
+  "confidence": 0.9,
+  "cited_clauses": [
+   "PLAN-2.1",
+   "PLAN-7.1",
+   "GL-MRI-3.1"
+  ],
+  "clause_text": {
+   "PLAN-2.1": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+   "GL-MRI-3.1": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication)."
+  },
+  "human_review": {
+   "required": false,
+   "reviewer": null,
+   "verdict": null,
+   "notes": null
+  },
+  "letter": "Re: Pre-authorisation request, patient P-1001 (Case a42a5a78)\nProvider: Dr. Rao, City Ortho (in-network). Plan: Gold-500\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for MRI lumbar spine has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+  "audit_log": [
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:51:37",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
+    "agent": "Request Parser",
+    "timestamp": "2026-11-18T00:51:37",
+    "action": "Structured request: MRI lumbar spine"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:51:37",
+    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
+   },
+   {
+    "agent": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:51:37",
+    "action": "COVERED_PRIOR_AUTH: PLAN-2.1, PLAN-7.1"
+   },
+   {
+    "agent": "Medical Necessity",
+    "timestamp": "2026-11-18T00:51:37",
+    "action": "MET: GL-MRI-3.1"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:51:37",
+    "action": "FAN-IN: merging coverage and necessity findings"
+   },
+   {
+    "agent": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:51:37",
+    "action": "APPROVE (confidence 0.9) citing PLAN-2.1, PLAN-7.1, GL-MRI-3.1"
+   },
+   {
+    "agent": "Letter Drafter",
+    "timestamp": "2026-11-18T00:51:37",
+    "action": "Drafted APPROVE letter"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1001",
+     "treatment": "MRI lumbar spine",
+     "diagnosis": "chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy",
+     "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:51:37"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "COVERED_PRIOR_AUTH",
+     "clauses": [
+      "PLAN-2.1",
+      "PLAN-7.1"
+     ],
+     "reason": "Covered service; prior authorisation required.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-2.1",
+       "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+       "score": 0.274
+      },
+      {
+       "clause_id": "PLAN-4.3",
+       "text": "Services from out-of-network providers are excluded except in emergencies.",
+       "score": 0.19
+      },
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.171
+      },
+      {
+       "clause_id": "PLAN-7.2",
+       "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+       "score": 0.118
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:51:37"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "MET",
+     "clauses": [
+      "GL-MRI-3.1"
+     ],
+     "reason": "Pain persisted 6+ weeks or red flags present.",
+     "retrieved": [
+      {
+       "clause_id": "GL-MRI-3.2",
+       "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+       "score": 0.42
+      },
+      {
+       "clause_id": "GL-MRI-3.1",
+       "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+       "score": 0.333
+      },
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.2
+      },
+      {
+       "clause_id": "GL-KNEE-2.2",
+       "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+       "score": 0.143
+      }
+     ],
+     "confidence": 0.85
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:51:37"
+   },
+   {
+    "field": "decision",
+    "value": "APPROVE",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:51:37"
+   },
+   {
+    "field": "ai_decision",
+    "value": "APPROVE",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:51:37"
+   },
+   {
+    "field": "confidence",
+    "value": 0.9,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:51:37"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-2.1",
+     "PLAN-7.1",
+     "GL-MRI-3.1"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:51:37"
+   },
+   {
+    "field": "status",
+    "value": "COMPLETED",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:51:37"
+   },
+   {
+    "field": "letter",
+    "value": "Re: Pre-authorisation request, patient P-1001 (Case a42a5a78)\nProvider: Dr. Rao, City Ortho (in-network). Plan: Gold-500\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for MRI lumbar spine has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+    "written_by": "Letter Drafter",
+    "timestamp": "2026-11-18T00:51:37"
+   }
+  ]
+ },
+ "f384788c": {
+  "case_id": "f384788c",
+  "created": "2026-11-18T00:52:21",
+  "raw_request": "Request MRI lumbar spine for P-1007. Diagnosis: low back pain for 2 weeks, no weakness, numbness or other red flags, no prior treatment tried. Provider: Dr. Rao, City Ortho (in-network). Plan: Gold-500.",
+  "status": "PENDING_HUMAN_REVIEW",
+  "parsed": {
+   "patient": "P-1007",
+   "treatment": "MRI lumbar spine",
+   "diagnosis": "low back pain for 2 weeks, no weakness, numbness or other red flags, no prior treatment tried",
+   "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+  },
+  "coverage_findings": {
+   "status": "COVERED_PRIOR_AUTH",
+   "clauses": [
+    "PLAN-2.1",
+    "PLAN-7.1"
+   ],
+   "reason": "Covered service; prior authorisation required.",
+   "retrieved": [
+    {
+     "clause_id": "PLAN-2.1",
+     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+     "score": 0.304
+    },
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.194
+    },
+    {
+     "clause_id": "PLAN-3.1",
+     "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
+     "score": 0.152
+    },
+    {
+     "clause_id": "PLAN-7.2",
+     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+     "score": 0.129
+    }
+   ],
+   "confidence": 0.9
+  },
+  "necessity_findings": {
+   "status": "NOT_MET",
+   "clauses": [
+    "GL-MRI-3.2"
+   ],
+   "reason": "Acute pain under 6 weeks with no red flags: MRI not indicated.",
+   "retrieved": [
+    {
+     "clause_id": "GL-MRI-3.2",
+     "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+     "score": 0.445
+    },
+    {
+     "clause_id": "GL-MRI-3.1",
+     "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+     "score": 0.344
+    },
+    {
+     "clause_id": "GL-KNEE-2.2",
+     "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+     "score": 0.188
+    },
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.131
+    }
+   ],
+   "confidence": 0.85
+  },
+  "decision": "DENY",
+  "ai_decision": "DENY",
+  "confidence": 0.88,
+  "cited_clauses": [
+   "PLAN-2.1",
+   "PLAN-7.1",
+   "GL-MRI-3.2"
+  ],
+  "clause_text": {
+   "PLAN-2.1": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+   "GL-MRI-3.2": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features."
+  },
+  "human_review": {
+   "required": true,
+   "reviewer": null,
+   "verdict": null,
+   "notes": null
+  },
+  "letter": "",
+  "audit_log": [
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:52:21",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
+    "agent": "Request Parser",
+    "timestamp": "2026-11-18T00:52:21",
+    "action": "Structured request: MRI lumbar spine"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:52:21",
+    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
+   },
+   {
+    "agent": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:52:21",
+    "action": "COVERED_PRIOR_AUTH: PLAN-2.1, PLAN-7.1"
+   },
+   {
+    "agent": "Medical Necessity",
+    "timestamp": "2026-11-18T00:52:21",
+    "action": "NOT_MET: GL-MRI-3.2"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:52:21",
+    "action": "FAN-IN: merging coverage and necessity findings"
+   },
+   {
+    "agent": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:21",
+    "action": "DENY (confidence 0.88) citing PLAN-2.1, PLAN-7.1, GL-MRI-3.2"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:52:21",
+    "action": "Routed to human peer reviewer (DENY)"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1007",
+     "treatment": "MRI lumbar spine",
+     "diagnosis": "low back pain for 2 weeks, no weakness, numbness or other red flags, no prior treatment tried",
+     "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:52:21"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "COVERED_PRIOR_AUTH",
+     "clauses": [
+      "PLAN-2.1",
+      "PLAN-7.1"
+     ],
+     "reason": "Covered service; prior authorisation required.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-2.1",
+       "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+       "score": 0.304
+      },
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.194
+      },
+      {
+       "clause_id": "PLAN-3.1",
+       "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
+       "score": 0.152
+      },
+      {
+       "clause_id": "PLAN-7.2",
+       "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+       "score": 0.129
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:52:21"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "NOT_MET",
+     "clauses": [
+      "GL-MRI-3.2"
+     ],
+     "reason": "Acute pain under 6 weeks with no red flags: MRI not indicated.",
+     "retrieved": [
+      {
+       "clause_id": "GL-MRI-3.2",
+       "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+       "score": 0.445
+      },
+      {
+       "clause_id": "GL-MRI-3.1",
+       "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+       "score": 0.344
+      },
+      {
+       "clause_id": "GL-KNEE-2.2",
+       "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+       "score": 0.188
+      },
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.131
+      }
+     ],
+     "confidence": 0.85
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:52:21"
+   },
+   {
+    "field": "decision",
+    "value": "DENY",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:21"
+   },
+   {
+    "field": "ai_decision",
+    "value": "DENY",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:21"
+   },
+   {
+    "field": "confidence",
+    "value": 0.88,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:21"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-2.1",
+     "PLAN-7.1",
+     "GL-MRI-3.2"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:21"
+   },
+   {
+    "field": "status",
+    "value": "PENDING_HUMAN_REVIEW",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:21"
+   }
+  ]
+ },
+ "d9403442": {
+  "case_id": "d9403442",
+  "created": "2026-11-18T00:52:33",
+  "raw_request": "Request MRI lumbar spine for P-1007. Diagnosis: low back pain for 2 weeks, no weakness, numbness or other red flags, no prior treatment tried. Provider: Dr. Rao, City Ortho (in-network). Plan: Gold-500.",
+  "status": "PENDING_HUMAN_REVIEW",
+  "parsed": {
+   "patient": "P-1007",
+   "treatment": "MRI lumbar spine",
+   "diagnosis": "low back pain for 2 weeks, no weakness, numbness or other red flags, no prior treatment tried",
+   "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+  },
+  "coverage_findings": {
+   "status": "COVERED_PRIOR_AUTH",
+   "clauses": [
+    "PLAN-2.1",
+    "PLAN-7.1"
+   ],
+   "reason": "Covered service; prior authorisation required.",
+   "retrieved": [
+    {
+     "clause_id": "PLAN-2.1",
+     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+     "score": 0.304
+    },
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.194
+    },
+    {
+     "clause_id": "PLAN-3.1",
+     "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
+     "score": 0.152
+    },
+    {
+     "clause_id": "PLAN-7.2",
+     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+     "score": 0.129
+    }
+   ],
+   "confidence": 0.9
+  },
+  "necessity_findings": {
+   "status": "NOT_MET",
+   "clauses": [
+    "GL-MRI-3.2"
+   ],
+   "reason": "Acute pain under 6 weeks with no red flags: MRI not indicated.",
+   "retrieved": [
+    {
+     "clause_id": "GL-MRI-3.2",
+     "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+     "score": 0.445
+    },
+    {
+     "clause_id": "GL-MRI-3.1",
+     "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+     "score": 0.344
+    },
+    {
+     "clause_id": "GL-KNEE-2.2",
+     "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+     "score": 0.188
+    },
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.131
+    }
+   ],
+   "confidence": 0.85
+  },
+  "decision": "DENY",
+  "ai_decision": "DENY",
+  "confidence": 0.88,
+  "cited_clauses": [
+   "PLAN-2.1",
+   "PLAN-7.1",
+   "GL-MRI-3.2"
+  ],
+  "clause_text": {
+   "PLAN-2.1": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+   "GL-MRI-3.2": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features."
+  },
+  "human_review": {
+   "required": true,
+   "reviewer": null,
+   "verdict": null,
+   "notes": null
+  },
+  "letter": "",
+  "audit_log": [
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:52:33",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
+    "agent": "Request Parser",
+    "timestamp": "2026-11-18T00:52:33",
+    "action": "Structured request: MRI lumbar spine"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:52:33",
+    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
+   },
+   {
+    "agent": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:52:33",
+    "action": "COVERED_PRIOR_AUTH: PLAN-2.1, PLAN-7.1"
+   },
+   {
+    "agent": "Medical Necessity",
+    "timestamp": "2026-11-18T00:52:33",
+    "action": "NOT_MET: GL-MRI-3.2"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:52:33",
+    "action": "FAN-IN: merging coverage and necessity findings"
+   },
+   {
+    "agent": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:33",
+    "action": "DENY (confidence 0.88) citing PLAN-2.1, PLAN-7.1, GL-MRI-3.2"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:52:33",
+    "action": "Routed to human peer reviewer (DENY)"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1007",
+     "treatment": "MRI lumbar spine",
+     "diagnosis": "low back pain for 2 weeks, no weakness, numbness or other red flags, no prior treatment tried",
+     "provider": "Dr. Rao, City Ortho (in-network). Plan: Gold-500"
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:52:33"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "COVERED_PRIOR_AUTH",
+     "clauses": [
+      "PLAN-2.1",
+      "PLAN-7.1"
+     ],
+     "reason": "Covered service; prior authorisation required.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-2.1",
+       "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+       "score": 0.304
+      },
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.194
+      },
+      {
+       "clause_id": "PLAN-3.1",
+       "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
+       "score": 0.152
+      },
+      {
+       "clause_id": "PLAN-7.2",
+       "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+       "score": 0.129
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:52:33"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "NOT_MET",
+     "clauses": [
+      "GL-MRI-3.2"
+     ],
+     "reason": "Acute pain under 6 weeks with no red flags: MRI not indicated.",
+     "retrieved": [
+      {
+       "clause_id": "GL-MRI-3.2",
+       "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+       "score": 0.445
+      },
+      {
+       "clause_id": "GL-MRI-3.1",
+       "text": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).",
+       "score": 0.344
+      },
+      {
+       "clause_id": "GL-KNEE-2.2",
+       "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+       "score": 0.188
+      },
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.131
+      }
+     ],
+     "confidence": 0.85
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:52:33"
+   },
+   {
+    "field": "decision",
+    "value": "DENY",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:33"
+   },
+   {
+    "field": "ai_decision",
+    "value": "DENY",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:33"
+   },
+   {
+    "field": "confidence",
+    "value": 0.88,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:33"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-2.1",
+     "PLAN-7.1",
+     "GL-MRI-3.2"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:33"
+   },
+   {
+    "field": "status",
+    "value": "PENDING_HUMAN_REVIEW",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:52:33"
+   }
+  ]
+ },
+ "6ae5e52c": {
+  "case_id": "6ae5e52c",
+  "created": "2026-11-18T00:53:14",
+  "raw_request": "Request knee arthroscopy for P-1008. Diagnosis: degenerative knee osteoarthritis only, no meniscal tear or mechanical symptoms. Provider: Dr. Mehta. Plan: Gold-500.",
+  "status": "PENDING_HUMAN_REVIEW",
+  "parsed": {
+   "patient": "P-1008",
+   "treatment": "knee arthroscopy",
+   "diagnosis": "degenerative knee osteoarthritis only, no meniscal tear or mechanical symptoms",
+   "provider": "Dr. Mehta. Plan: Gold-500"
+  },
+  "coverage_findings": {
+   "status": "COVERED_PRIOR_AUTH",
+   "clauses": [
+    "PLAN-2.2",
+    "PLAN-7.1"
+   ],
+   "reason": "Covered service; prior authorisation required.",
+   "retrieved": [
+    {
+     "clause_id": "PLAN-2.2",
+     "text": "Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.",
+     "score": 0.161
+    },
+    {
+     "clause_id": "PLAN-7.2",
+     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+     "score": 0.141
+    },
+    {
+     "clause_id": "PLAN-4.2",
+     "text": "Experimental, investigational or unproven treatments are excluded.",
+     "score": 0.125
+    },
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.108
+    }
+   ],
+   "confidence": 0.9
+  },
+  "necessity_findings": {
+   "status": "NOT_MET",
+   "clauses": [
+    "GL-KNEE-2.1"
+   ],
+   "reason": "Degenerative OA alone is not an indication.",
+   "retrieved": [
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.484
+    },
+    {
+     "clause_id": "GL-KNEE-2.2",
+     "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+     "score": 0.295
+    },
+    {
+     "clause_id": "GL-TKR-4.1",
+     "text": "Total knee replacement (arthroplasty) is indicated for advanced severe osteoarthritis with radiographic joint space narrowing, persistent functional impairment, and failure of at least 3 months of comprehensive conservative management.",
+     "score": 0.125
+    },
+    {
+     "clause_id": "GL-ENT-9.1",
+     "text": "Nasal surgery (rhinoplasty/septoplasty) is medically necessary only for documented structural airway obstruction confirmed by clinical rhinoscopy or significant post-traumatic nasal deformity causing respiratory impairment; procedures performed purely for aesthetic or cosmetic contouring are not medically necessary.",
+     "score": 0.088
+    }
+   ],
+   "confidence": 0.85
+  },
+  "decision": "DENY",
+  "ai_decision": "DENY",
+  "confidence": 0.88,
+  "cited_clauses": [
+   "PLAN-2.2",
+   "PLAN-7.1",
+   "GL-KNEE-2.1"
+  ],
+  "clause_text": {
+   "PLAN-2.2": "Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.",
+   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+   "GL-KNEE-2.1": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction."
+  },
+  "human_review": {
+   "required": true,
+   "reviewer": null,
+   "verdict": null,
+   "notes": null
+  },
+  "letter": "",
+  "audit_log": [
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:53:14",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
+    "agent": "Request Parser",
+    "timestamp": "2026-11-18T00:53:14",
+    "action": "Structured request: knee arthroscopy"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:53:14",
+    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
+   },
+   {
+    "agent": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:53:14",
+    "action": "COVERED_PRIOR_AUTH: PLAN-2.2, PLAN-7.1"
+   },
+   {
+    "agent": "Medical Necessity",
+    "timestamp": "2026-11-18T00:53:14",
+    "action": "NOT_MET: GL-KNEE-2.1"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:53:14",
+    "action": "FAN-IN: merging coverage and necessity findings"
+   },
+   {
+    "agent": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:14",
+    "action": "DENY (confidence 0.88) citing PLAN-2.2, PLAN-7.1, GL-KNEE-2.1"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:53:14",
+    "action": "Routed to human peer reviewer (DENY)"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1008",
+     "treatment": "knee arthroscopy",
+     "diagnosis": "degenerative knee osteoarthritis only, no meniscal tear or mechanical symptoms",
+     "provider": "Dr. Mehta. Plan: Gold-500"
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:53:14"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "COVERED_PRIOR_AUTH",
+     "clauses": [
+      "PLAN-2.2",
+      "PLAN-7.1"
+     ],
+     "reason": "Covered service; prior authorisation required.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-2.2",
+       "text": "Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.",
+       "score": 0.161
+      },
+      {
+       "clause_id": "PLAN-7.2",
+       "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+       "score": 0.141
+      },
+      {
+       "clause_id": "PLAN-4.2",
+       "text": "Experimental, investigational or unproven treatments are excluded.",
+       "score": 0.125
+      },
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.108
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:53:14"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "NOT_MET",
+     "clauses": [
+      "GL-KNEE-2.1"
+     ],
+     "reason": "Degenerative OA alone is not an indication.",
+     "retrieved": [
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.484
+      },
+      {
+       "clause_id": "GL-KNEE-2.2",
+       "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+       "score": 0.295
+      },
+      {
+       "clause_id": "GL-TKR-4.1",
+       "text": "Total knee replacement (arthroplasty) is indicated for advanced severe osteoarthritis with radiographic joint space narrowing, persistent functional impairment, and failure of at least 3 months of comprehensive conservative management.",
+       "score": 0.125
+      },
+      {
+       "clause_id": "GL-ENT-9.1",
+       "text": "Nasal surgery (rhinoplasty/septoplasty) is medically necessary only for documented structural airway obstruction confirmed by clinical rhinoscopy or significant post-traumatic nasal deformity causing respiratory impairment; procedures performed purely for aesthetic or cosmetic contouring are not medically necessary.",
+       "score": 0.088
+      }
+     ],
+     "confidence": 0.85
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:53:14"
+   },
+   {
+    "field": "decision",
+    "value": "DENY",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:14"
+   },
+   {
+    "field": "ai_decision",
+    "value": "DENY",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:14"
+   },
+   {
+    "field": "confidence",
+    "value": 0.88,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:14"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-2.2",
+     "PLAN-7.1",
+     "GL-KNEE-2.1"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:14"
+   },
+   {
+    "field": "status",
+    "value": "PENDING_HUMAN_REVIEW",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:14"
+   }
+  ]
+ },
+ "e153e9cb": {
+  "case_id": "e153e9cb",
+  "created": "2026-11-18T00:53:51",
+  "raw_request": "Patient P-1005 requests Cosmetic Rhinoplasty for dorsal hump reduction. No nasal obstruction. Plan: Gold-500.",
+  "status": "COMPLETED",
+  "parsed": {
+   "patient": "P-1005",
+   "treatment": "Patient P-1005 requests Cosmetic Rhinoplasty for dorsal hump reduction",
+   "diagnosis": "",
+   "provider": ""
+  },
+  "coverage_findings": {
+   "status": "EXCLUDED",
+   "clauses": [
+    "PLAN-4.1"
+   ],
+   "reason": "Cosmetic procedure with no functional need is excluded.",
+   "retrieved": [
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.197
+    },
+    {
+     "clause_id": "PLAN-4.1",
+     "text": "Cosmetic procedures performed to improve appearance without a functional medical need are excluded.",
+     "score": 0.172
+    },
+    {
+     "clause_id": "PLAN-2.3",
+     "text": "Physiotherapy is covered up to 20 sessions per plan year with a physician referral.",
+     "score": 0.022
+    },
+    {
+     "clause_id": "PLAN-3.1",
+     "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
+     "score": 0.019
+    }
+   ],
+   "confidence": 0.9
+  },
+  "necessity_findings": {
+   "status": "NOT_APPLICABLE",
+   "clauses": [],
+   "reason": "Excluded by plan; no clinical review needed.",
+   "retrieved": [
+    {
+     "clause_id": "GL-ENT-9.1",
+     "text": "Nasal surgery (rhinoplasty/septoplasty) is medically necessary only for documented structural airway obstruction confirmed by clinical rhinoscopy or significant post-traumatic nasal deformity causing respiratory impairment; procedures performed purely for aesthetic or cosmetic contouring are not medically necessary.",
+     "score": 0.354
+    },
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.084
+    },
+    {
+     "clause_id": "GL-MRI-3.2",
+     "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+     "score": 0.021
+    },
+    {
+     "clause_id": "GL-TKR-4.1",
+     "text": "Total knee replacement (arthroplasty) is indicated for advanced severe osteoarthritis with radiographic joint space narrowing, persistent functional impairment, and failure of at least 3 months of comprehensive conservative management.",
+     "score": 0.018
+    }
+   ],
+   "confidence": 0.85
+  },
+  "decision": "DENY",
+  "ai_decision": "DENY",
+  "confidence": 0.93,
+  "cited_clauses": [
+   "PLAN-4.1"
+  ],
+  "clause_text": {
+   "PLAN-4.1": "Cosmetic procedures performed to improve appearance without a functional medical need are excluded."
+  },
+  "human_review": {
+   "required": true,
+   "reviewer": "Dr. Sarah Mitchell, MD",
+   "verdict": "UPHOLD",
+   "notes": "Confirmed cosmetic exclusion PLAN-4.1."
+  },
+  "letter": "Re: Pre-authorisation request, patient P-1005 (Case e153e9cb)\nProvider: \n\nDear Provider,\n\nAfter clinical and benefit review, pre-authorisation for Patient P-1005 requests Cosmetic Rhinoplasty for dorsal hump reduction has been DENIED. This decision was reviewed by a human peer reviewer.\n\nBasis for this decision:\n  - PLAN-4.1: Cosmetic procedures performed to improve appearance without a functional medical need are excluded.\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+  "audit_log": [
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
+    "agent": "Request Parser",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "Structured request: Patient P-1005 requests Cosmetic Rhinoplasty for dorsal hump reduction"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
+   },
+   {
+    "agent": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "EXCLUDED: PLAN-4.1"
+   },
+   {
+    "agent": "Medical Necessity",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "NOT_APPLICABLE: -"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "FAN-IN: merging coverage and necessity findings"
+   },
+   {
+    "agent": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "DENY (confidence 0.93) citing PLAN-4.1"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "Routed to human peer reviewer (DENY)"
+   },
+   {
+    "agent": "Human Reviewer",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "UPHOLD by Dr. Sarah Mitchell, MD: final decision DENY. Confirmed cosmetic exclusion PLAN-4.1."
+   },
+   {
+    "agent": "Letter Drafter",
+    "timestamp": "2026-11-18T00:53:51",
+    "action": "Drafted DENY letter"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1005",
+     "treatment": "Patient P-1005 requests Cosmetic Rhinoplasty for dorsal hump reduction",
+     "diagnosis": "",
+     "provider": ""
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "EXCLUDED",
+     "clauses": [
+      "PLAN-4.1"
+     ],
+     "reason": "Cosmetic procedure with no functional need is excluded.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.197
+      },
+      {
+       "clause_id": "PLAN-4.1",
+       "text": "Cosmetic procedures performed to improve appearance without a functional medical need are excluded.",
+       "score": 0.172
+      },
+      {
+       "clause_id": "PLAN-2.3",
+       "text": "Physiotherapy is covered up to 20 sessions per plan year with a physician referral.",
+       "score": 0.022
+      },
+      {
+       "clause_id": "PLAN-3.1",
+       "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
+       "score": 0.019
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "NOT_APPLICABLE",
+     "clauses": [],
+     "reason": "Excluded by plan; no clinical review needed.",
+     "retrieved": [
+      {
+       "clause_id": "GL-ENT-9.1",
+       "text": "Nasal surgery (rhinoplasty/septoplasty) is medically necessary only for documented structural airway obstruction confirmed by clinical rhinoscopy or significant post-traumatic nasal deformity causing respiratory impairment; procedures performed purely for aesthetic or cosmetic contouring are not medically necessary.",
+       "score": 0.354
+      },
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.084
+      },
+      {
+       "clause_id": "GL-MRI-3.2",
+       "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+       "score": 0.021
+      },
+      {
+       "clause_id": "GL-TKR-4.1",
+       "text": "Total knee replacement (arthroplasty) is indicated for advanced severe osteoarthritis with radiographic joint space narrowing, persistent functional impairment, and failure of at least 3 months of comprehensive conservative management.",
+       "score": 0.018
+      }
+     ],
+     "confidence": 0.85
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "decision",
+    "value": "DENY",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "ai_decision",
+    "value": "DENY",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "confidence",
+    "value": 0.93,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-4.1"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "status",
+    "value": "PENDING_HUMAN_REVIEW",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "human_review",
+    "value": {
+     "required": true,
+     "reviewer": "Dr. Sarah Mitchell, MD",
+     "verdict": "UPHOLD",
+     "notes": "Confirmed cosmetic exclusion PLAN-4.1."
+    },
+    "written_by": "Clinical Peer Reviewer",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "decision",
+    "value": "DENY",
+    "written_by": "Clinical Peer Reviewer",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "status",
+    "value": "COMPLETED",
+    "written_by": "Clinical Peer Reviewer",
+    "timestamp": "2026-11-18T00:53:51"
+   },
+   {
+    "field": "letter",
+    "value": "Re: Pre-authorisation request, patient P-1005 (Case e153e9cb)\nProvider: \n\nDear Provider,\n\nAfter clinical and benefit review, pre-authorisation for Patient P-1005 requests Cosmetic Rhinoplasty for dorsal hump reduction has been DENIED. This decision was reviewed by a human peer reviewer.\n\nBasis for this decision:\n  - PLAN-4.1: Cosmetic procedures performed to improve appearance without a functional medical need are excluded.\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+    "written_by": "Letter Drafter",
+    "timestamp": "2026-11-18T00:53:51"
+   }
+  ]
+ },
+ "388ad34f": {
+  "case_id": "388ad34f",
+  "created": "2026-11-18T00:55:33",
+  "raw_request": "Request knee surgery for P-1009. Diagnosis: knee pain. No imaging results, no history of conservative treatment provided. Provider: Dr. unknown. Plan: Gold-500.",
+  "status": "PENDING_HUMAN_REVIEW",
+  "parsed": {
+   "patient": "P-1009",
+   "treatment": "knee surgery",
+   "diagnosis": "knee pain. No imaging results, no history of conservative treatment provided",
+   "provider": "Dr. unknown. Plan: Gold-500"
+  },
+  "coverage_findings": {
+   "status": "COVERED_PRIOR_AUTH",
+   "clauses": [
+    "PLAN-2.2",
+    "PLAN-7.1"
+   ],
+   "reason": "Covered service; prior authorisation required.",
+   "retrieved": [
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.292
+    },
+    {
+     "clause_id": "PLAN-3.1",
+     "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
+     "score": 0.166
+    },
+    {
+     "clause_id": "PLAN-7.2",
+     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+     "score": 0.145
+    },
+    {
+     "clause_id": "PLAN-2.1",
+     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+     "score": 0.137
+    }
+   ],
+   "confidence": 0.9
+  },
+  "necessity_findings": {
+   "status": "INSUFFICIENT",
+   "clauses": [
+    "GL-KNEE-2.1"
+   ],
+   "reason": "Clinical documentation is missing, so criteria cannot be assessed.",
+   "retrieved": [
+    {
+     "clause_id": "GL-KNEE-2.2",
+     "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+     "score": 0.383
+    },
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.216
+    },
+    {
+     "clause_id": "GL-TKR-4.1",
+     "text": "Total knee replacement (arthroplasty) is indicated for advanced severe osteoarthritis with radiographic joint space narrowing, persistent functional impairment, and failure of at least 3 months of comprehensive conservative management.",
+     "score": 0.169
+    },
+    {
+     "clause_id": "GL-ONC-6.1",
+     "text": "Chemotherapy and antineoplastic regimens require a histopathologically confirmed malignancy diagnosis and a detailed written treatment regimen signed by a board-certified medical oncologist.",
+     "score": 0.13
+    }
+   ],
+   "confidence": 0.6
+  },
+  "decision": "MORE_INFO",
+  "ai_decision": "MORE_INFO",
+  "confidence": 0.7,
+  "cited_clauses": [
+   "PLAN-7.2",
+   "GL-KNEE-2.1"
+  ],
+  "clause_text": {
+   "PLAN-7.2": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+   "GL-KNEE-2.1": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction."
+  },
+  "human_review": {
+   "required": true,
+   "reviewer": null,
+   "verdict": null,
+   "notes": null
+  },
+  "letter": "",
+  "audit_log": [
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:55:33",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
+    "agent": "Request Parser",
+    "timestamp": "2026-11-18T00:55:33",
+    "action": "Structured request: knee surgery"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:55:33",
+    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
+   },
+   {
+    "agent": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:55:33",
+    "action": "COVERED_PRIOR_AUTH: PLAN-2.2, PLAN-7.1"
+   },
+   {
+    "agent": "Medical Necessity",
+    "timestamp": "2026-11-18T00:55:33",
+    "action": "INSUFFICIENT: GL-KNEE-2.1"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:55:33",
+    "action": "FAN-IN: merging coverage and necessity findings"
+   },
+   {
+    "agent": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:55:33",
+    "action": "MORE_INFO (confidence 0.7) citing PLAN-7.2, GL-KNEE-2.1"
+   },
+   {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:55:33",
+    "action": "Routed to human peer reviewer (MORE_INFO)"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1009",
+     "treatment": "knee surgery",
+     "diagnosis": "knee pain. No imaging results, no history of conservative treatment provided",
+     "provider": "Dr. unknown. Plan: Gold-500"
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:55:33"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "COVERED_PRIOR_AUTH",
+     "clauses": [
+      "PLAN-2.2",
+      "PLAN-7.1"
+     ],
+     "reason": "Covered service; prior authorisation required.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.292
+      },
+      {
+       "clause_id": "PLAN-3.1",
+       "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
+       "score": 0.166
+      },
+      {
+       "clause_id": "PLAN-7.2",
+       "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+       "score": 0.145
+      },
+      {
+       "clause_id": "PLAN-2.1",
+       "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+       "score": 0.137
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:55:33"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "INSUFFICIENT",
+     "clauses": [
+      "GL-KNEE-2.1"
+     ],
+     "reason": "Clinical documentation is missing, so criteria cannot be assessed.",
+     "retrieved": [
+      {
+       "clause_id": "GL-KNEE-2.2",
+       "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+       "score": 0.383
+      },
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.216
+      },
+      {
+       "clause_id": "GL-TKR-4.1",
+       "text": "Total knee replacement (arthroplasty) is indicated for advanced severe osteoarthritis with radiographic joint space narrowing, persistent functional impairment, and failure of at least 3 months of comprehensive conservative management.",
+       "score": 0.169
+      },
+      {
+       "clause_id": "GL-ONC-6.1",
+       "text": "Chemotherapy and antineoplastic regimens require a histopathologically confirmed malignancy diagnosis and a detailed written treatment regimen signed by a board-certified medical oncologist.",
+       "score": 0.13
+      }
+     ],
+     "confidence": 0.6
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:55:33"
+   },
+   {
+    "field": "decision",
+    "value": "MORE_INFO",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:55:33"
+   },
+   {
+    "field": "ai_decision",
+    "value": "MORE_INFO",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:55:33"
+   },
+   {
+    "field": "confidence",
+    "value": 0.7,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:55:33"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-7.2",
+     "GL-KNEE-2.1"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:55:33"
+   },
+   {
+    "field": "status",
+    "value": "PENDING_HUMAN_REVIEW",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:55:33"
+   }
+  ]
  }
 }

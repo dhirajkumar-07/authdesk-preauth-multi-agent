@@ -296,15 +296,18 @@ with left_col:
                         
                         btn_col1, btn_col2, btn_col3 = st.columns(3)
                         if btn_col1.button("👍 Uphold AI Denial", use_container_width=True):
-                            asyncio.run(apply_peer_review(case, "UPHOLD", reviewer_name, review_notes))
+                            title, out = asyncio.run(apply_peer_review(case, "UPHOLD", reviewer_name, review_notes))
+                            st.session_state.step_outputs[3] = {"title": title, "data": out}
                             st.session_state.peer_review_done = True
                             st.rerun()
                         if btn_col2.button("🔄 Overturn to Approval", use_container_width=True):
-                            asyncio.run(apply_peer_review(case, "OVERTURN", reviewer_name, review_notes))
+                            title, out = asyncio.run(apply_peer_review(case, "OVERTURN", reviewer_name, review_notes))
+                            st.session_state.step_outputs[3] = {"title": title, "data": out}
                             st.session_state.peer_review_done = True
                             st.rerun()
                         if btn_col3.button("📝 Request Info", use_container_width=True):
-                            asyncio.run(apply_peer_review(case, "REQUEST_INFO", reviewer_name, review_notes))
+                            title, out = asyncio.run(apply_peer_review(case, "REQUEST_INFO", reviewer_name, review_notes))
+                            st.session_state.step_outputs[3] = {"title": title, "data": out}
                             st.session_state.peer_review_done = True
                             st.rerun()
                     else:
@@ -331,7 +334,7 @@ with left_col:
     # Handle auto-play progression
     if auto_play and st.session_state.current_step < len(STEPS) - 1:
         # Pause at peer review if not completed
-        if st.session_state.current_step == 2 and case.get("decision") != "APPROVE" and not case.get("human_review", {}).get("verdict"):
+        if st.session_state.current_step == 3 and case.get("decision") != "APPROVE" and not case.get("human_review", {}).get("verdict"):
             pass  # Wait for human input
         else:
             time.sleep(speed)

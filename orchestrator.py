@@ -54,10 +54,12 @@ async def execute_step(step_idx: int, case: CaseRecord, **kwargs) -> Tuple[str, 
     elif step_idx == 3:
         # Peer review step
         if case.get("decision") != "APPROVE" and not case.get("human_review", {}).get("verdict"):
-            verdict = kwargs.get("verdict", "UPHOLD")
-            reviewer = kwargs.get("reviewer", "Dr. Senior Reviewer")
-            notes = kwargs.get("notes", "Peer review exclusion/criteria verified.")
-            return await apply_peer_review(case, verdict, reviewer, notes)
+            if "verdict" in kwargs:
+                verdict = kwargs["verdict"]
+                reviewer = kwargs.get("reviewer", "Dr. Senior Reviewer")
+                notes = kwargs.get("notes", "Peer review exclusion/criteria verified.")
+                return await apply_peer_review(case, verdict, reviewer, notes)
+            return "Pending Peer Review Escalation", {"status": "Awaiting clinician verdict", "required": True}
         else:
             return "Human Review Skipped", {"reason": "Approval proceeded straight through or already reviewed."}
 
