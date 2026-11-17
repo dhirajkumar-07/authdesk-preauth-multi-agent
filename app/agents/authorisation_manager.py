@@ -1,5 +1,11 @@
-from ..rag import clause_text
-from ..case_record import log
+try:
+    from ..rag import clause_text
+except (ImportError, ValueError):
+    from rag import clause_text
+try:
+    from ..case_record import log
+except (ImportError, ValueError):
+    from case_record import log
 async def _rules(c):
     cov, nec = c["coverage_findings"], c["necessity_findings"]
     if cov["status"] == "EXCLUDED": d, cl, conf = "DENY", cov["clauses"], 0.93
@@ -11,7 +17,10 @@ async def _rules(c):
     c.update(decision=d, ai_decision=d, confidence=conf, cited_clauses=cl, clause_text={i: clause_text(i) for i in cl})
     log(c, "Authorisation Manager", f"{d} (confidence {conf}) citing {', '.join(cl)}")
 
-from .. import llm
+try:
+    from .. import llm
+except (ImportError, ValueError):
+    import llm
 SYS = ("You are the Authorisation Manager. Combine the Coverage and Medical Necessity findings into ONE decision. Rules: plan EXCLUDED -> DENY; "
        "medical criteria NOT_MET -> DENY; documentation INSUFFICIENT or coverage UNCLEAR -> MORE_INFO (cite PLAN-7.2); both fine -> APPROVE. "
        'Return {"decision": "APPROVE"|"DENY"|"MORE_INFO", "cited_clauses": [IDs taken ONLY from the findings, plus PLAN-7.2 for MORE_INFO], "confidence": 0-1, "rationale": str}.')

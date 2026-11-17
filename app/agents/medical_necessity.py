@@ -1,7 +1,16 @@
 import re
-from ..rag import retrieve
-from ..common import procedure, MISSING
-from ..case_record import log
+try:
+    from ..rag import retrieve
+except (ImportError, ValueError):
+    from rag import retrieve
+try:
+    from ..common import procedure, MISSING
+except (ImportError, ValueError):
+    from common import procedure, MISSING
+try:
+    from ..case_record import log
+except (ImportError, ValueError):
+    from case_record import log
 async def _rules(c):
     t = c["raw_request"]; tl = t.lower(); p = procedure(t); hits = retrieve(t, "guidelines")
     st, cl, why = "MET", [], ""
@@ -29,7 +38,10 @@ async def _rules(c):
     c["necessity_findings"] = {"status": st, "clauses": cl, "reason": why, "retrieved": hits, "confidence": 0.85 if st != "INSUFFICIENT" else 0.6}
     log(c, "Medical Necessity", f"{st}: {', '.join(cl) or '-'}")
 
-from .. import llm
+try:
+    from .. import llm
+except (ImportError, ValueError):
+    import llm
 SYS = ("You are the Medical Necessity agent. Judge ONLY against the GUIDELINE CLAUSES given (retrieved by RAG). Never use outside medical knowledge. "
        "If the request lacks the documentation needed to apply the criteria, the status is INSUFFICIENT. If the treatment is excluded by the plan (cosmetic/experimental) use NOT_APPLICABLE with clauses []. "
        'Return {"status": "MET" | "NOT_MET" | "INSUFFICIENT" | "NOT_APPLICABLE", "clauses": [guideline IDs used], "reason": str, "confidence": 0-1}. Cite only IDs in the GUIDELINE CLAUSES.')

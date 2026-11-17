@@ -1,7 +1,4 @@
-.env
-*.env
 __pycache__/
-*.py[cod]
-*$py.class
-authdesk-kit/data/cases.json
-*.log
+*.pyc
+.env
+.venv/

@@ -113,3 +113,4 @@ async def run(case_record) -> str:
     letter = await with_fallback("Letter Drafter", _run_llm, _run_rule, case_record)
     case_record.record_write("letter", letter, written_by="Letter Drafter")
     return letter
+

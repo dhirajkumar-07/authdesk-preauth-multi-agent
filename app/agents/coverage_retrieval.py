@@ -1,7 +1,16 @@
 import re
-from ..rag import retrieve
-from ..common import procedure
-from ..case_record import log
+try:
+    from ..rag import retrieve
+except (ImportError, ValueError):
+    from rag import retrieve
+try:
+    from ..common import procedure
+except (ImportError, ValueError):
+    from common import procedure
+try:
+    from ..case_record import log
+except (ImportError, ValueError):
+    from case_record import log
 MAP = {"mri": ["PLAN-2.1", "PLAN-7.1"], "ct": ["PLAN-2.1", "PLAN-7.1"], "tkr": ["PLAN-2.2", "PLAN-7.1"], "arthroscopy": ["PLAN-2.2", "PLAN-7.1"],
        "knee_surgery": ["PLAN-2.2", "PLAN-7.1"], "bariatric": ["PLAN-2.4", "PLAN-7.1"], "chemo": ["PLAN-3.1", "PLAN-7.1"]}
 async def _rules(c):
@@ -15,7 +24,10 @@ async def _rules(c):
     c["coverage_findings"] = {"status": st, "clauses": cl, "reason": why, "retrieved": hits, "confidence": 0.9 if st != "UNCLEAR" else 0.5}
     log(c, "Coverage Retrieval", f"{st}: {', '.join(cl)}")
 
-from .. import llm
+try:
+    from .. import llm
+except (ImportError, ValueError):
+    import llm
 SYS = ("You are the Coverage Retrieval agent. Decide ONLY from the PLAN CLAUSES given (retrieved by RAG). Never use outside knowledge. "
        "Check exclusions (cosmetic, experimental, out-of-network) and whether the service is covered / needs prior authorisation. "
        'Return {"status": "COVERED_PRIOR_AUTH" | "EXCLUDED" | "UNCLEAR", "clauses": [clause IDs that support your finding], "reason": str, "confidence": 0-1}. '

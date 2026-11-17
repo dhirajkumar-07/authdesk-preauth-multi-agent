@@ -1,4 +1,7 @@
-from ..case_record import log
+try:
+    from ..case_record import log
+except (ImportError, ValueError):
+    from case_record import log
 def _template(c):
     p, d = c["parsed"], c["decision"]
     cites = "\n".join(f"  - {i}: {c['clause_text'].get(i, '')}" for i in c["cited_clauses"])
@@ -7,7 +10,10 @@ def _template(c):
             "MORE_INFO": f"We need additional information before deciding on {p['treatment']}. Please send the missing clinical documentation."}[d]
     return (f"Re: Pre-authorisation request, patient {p.get('patient') or 'N/A'} (Case {c['case_id']})\nProvider: {p.get('provider')}\n\nDear Provider,\n\n{body}\n\n"
             f"Basis for this decision:\n{cites}\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management")
-from .. import llm
+try:
+    from .. import llm
+except (ImportError, ValueError):
+    import llm
 SYS = ("You are the Letter Drafter agent for a health insurer. Write a professional pre-authorisation response letter that matches the FINAL DECISION exactly "
        "(approval / denial / request for more information). Cite every clause ID provided with its text. Do not add clauses, facts or promises not provided. "
        "For a denial, mention the human peer review and the right to appeal. Plain text, under 250 words.")

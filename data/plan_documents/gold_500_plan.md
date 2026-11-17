@@ -24,3 +24,4 @@ PLAN-4.4 Dental procedures, cosmetic dentistry, and routine oral surgeries are e
 PLAN-7.1 Prior authorisation is required before the delivery of elective surgeries, advanced imaging, bariatric procedures, oncology regimens, and specialty prescription drugs.
 PLAN-7.2 Incomplete Clinical Submissions: If submitted medical records lack documentation required to determine medical necessity, the plan must issue a request for additional clinical information (MORE_INFO) before a determination can be made.
 PLAN-7.3 Clinical Peer Review and Appeals: Any adverse determination (denial) is subject to mandatory clinical peer review escalation by a licensed physician before finalization, and members retain full appeal rights within 60 calendar days.
+

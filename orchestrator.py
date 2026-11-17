@@ -130,3 +130,4 @@ async def run_full_pipeline(raw_request: str, auto_uphold: bool = True) -> CaseR
         case.record_write("status", "COMPLETED", written_by="Orchestrator")
         
     return case
+

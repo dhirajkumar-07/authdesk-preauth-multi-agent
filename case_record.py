@@ -79,3 +79,4 @@ def create_case(raw_request: str, case_id: str = None) -> CaseRecord:
 
 def get_case(case_id: str) -> CaseRecord:
     return STORE.get(case_id)
+

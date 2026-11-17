@@ -1,14 +1,14 @@
 {
- "c587a537": {
-  "case_id": "c587a537",
-  "created": "2026-11-15T22:54:54",
-  "raw_request": "Request MRI lumbar spine for patient P-1001. Diagnosis: chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy. Provider: Dr. Rao, City Ortho (in-network).",
+ "f9a3cef4": {
+  "case_id": "f9a3cef4",
+  "created": "2026-11-18T00:10:52",
+  "raw_request": "Request knee MRI for patient P-1001 with 8 weeks failed physical therapy.",
   "status": "COMPLETED",
   "parsed": {
    "patient": "P-1001",
-   "treatment": "MRI lumbar spine",
-   "diagnosis": "chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy",
-   "provider": "Dr. Rao, City Ortho (in-network)"
+   "treatment": "knee MRI",
+   "diagnosis": "",
+   "provider": ""
   },
   "coverage_findings": {
    "status": "COVERED_PRIOR_AUTH",
@@ -21,22 +21,22 @@
     {
      "clause_id": "PLAN-2.1",
      "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
-     "score": 0.269
-    },
-    {
-     "clause_id": "PLAN-4.3",
-     "text": "Services from out-of-network providers are excluded except in emergencies.",
-     "score": 0.182
-    },
-    {
-     "clause_id": "PLAN-7.1",
-     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-     "score": 0.161
+     "score": 0.173
     },
     {
      "clause_id": "PLAN-7.2",
      "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
-     "score": 0.105
+     "score": 0.15
+    },
+    {
+     "clause_id": "PLAN-7.1",
+     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+     "score": 0.116
+    },
+    {
+     "clause_id": "PLAN-2.3",
+     "text": "Physiotherapy is covered up to 20 sessions per plan year with a physician referral.",
+     "score": 0.072
     }
    ],
    "confidence": 0.9
@@ -49,1078 +49,24 @@
    "reason": "Pain persisted 6+ weeks or red flags present.",
    "retrieved": [
     {
-     "clause_id": "GL-MRI-3.1",
-     "text": "Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy.",
-     "score": 0.398
+     "clause_id": "GL-KNEE-2.2",
+     "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+     "score": 0.306
+    },
+    {
+     "clause_id": "GL-KNEE-2.1",
+     "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+     "score": 0.235
     },
     {
      "clause_id": "GL-MRI-3.2",
-     "text": "Routine MRI is not indicated for acute uncomplicated low back pain lasting under 6 weeks without red-flag features.",
-     "score": 0.369
-    },
-    {
-     "clause_id": "GL-CT-8.1",
-     "text": "CT head is indicated for head trauma with red-flag features (loss of consciousness, vomiting, new neurological deficit, anticoagulant use).",
-     "score": 0.119
-    },
-    {
-     "clause_id": "GL-TKR-4.1",
-     "text": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.",
-     "score": 0.115
-    }
-   ],
-   "confidence": 0.85
-  },
-  "decision": "APPROVE",
-  "ai_decision": "APPROVE",
-  "confidence": 0.9,
-  "cited_clauses": [
-   "PLAN-2.1",
-   "PLAN-7.1",
-   "GL-MRI-3.1"
-  ],
-  "clause_text": {
-   "PLAN-2.1": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
-   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-   "GL-MRI-3.1": "Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy."
-  },
-  "human_review": {
-   "required": false,
-   "reviewer": null,
-   "verdict": null,
-   "notes": null
-  },
-  "letter": "Re: Pre-authorisation request, patient P-1001 (Case c587a537)\nProvider: Dr. Rao, City Ortho (in-network)\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for MRI lumbar spine has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy.\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
-  "audit_log": [
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:55:15",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:55:15",
-    "action": "Structured request: MRI lumbar spine"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:55:15",
-    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:55:28",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:55:28",
-    "action": "COVERED_PRIOR_AUTH: PLAN-2.1, PLAN-7.1"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:55:30",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:55:30",
-    "action": "MET: GL-MRI-3.1"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:55:30",
-    "action": "FAN-IN: findings merged"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:55:35",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:55:35",
-    "action": "APPROVE (confidence 0.9) citing PLAN-2.1, PLAN-7.1, GL-MRI-3.1"
-   },
-   {
-    "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T22:55:39",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T22:55:39",
-    "action": "Drafted APPROVE letter"
-   }
-  ]
- },
- "2ff55de7": {
-  "case_id": "2ff55de7",
-  "created": "2026-11-15T22:55:07",
-  "raw_request": "Request MRI lumbar spine for patient P-1001. Diagnosis: chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy. Provider: Dr. Rao, City Ortho (in-network).",
-  "status": "COMPLETED",
-  "parsed": {
-   "patient": "P-1001",
-   "treatment": "MRI lumbar spine",
-   "diagnosis": "chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy",
-   "provider": "Dr. Rao, City Ortho (in-network)"
-  },
-  "coverage_findings": {
-   "status": "COVERED_PRIOR_AUTH",
-   "clauses": [
-    "PLAN-2.1",
-    "PLAN-7.1"
-   ],
-   "reason": "Covered service; prior authorisation required.",
-   "retrieved": [
-    {
-     "clause_id": "PLAN-2.1",
-     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
-     "score": 0.269
-    },
-    {
-     "clause_id": "PLAN-4.3",
-     "text": "Services from out-of-network providers are excluded except in emergencies.",
-     "score": 0.182
-    },
-    {
-     "clause_id": "PLAN-7.1",
-     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-     "score": 0.161
-    },
-    {
-     "clause_id": "PLAN-7.2",
-     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
-     "score": 0.105
-    }
-   ],
-   "confidence": 0.9
-  },
-  "necessity_findings": {
-   "status": "MET",
-   "clauses": [
-    "GL-MRI-3.1"
-   ],
-   "reason": "Pain persisted 6+ weeks or red flags present.",
-   "retrieved": [
-    {
-     "clause_id": "GL-MRI-3.1",
-     "text": "Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy.",
-     "score": 0.398
-    },
-    {
-     "clause_id": "GL-MRI-3.2",
-     "text": "Routine MRI is not indicated for acute uncomplicated low back pain lasting under 6 weeks without red-flag features.",
-     "score": 0.369
-    },
-    {
-     "clause_id": "GL-CT-8.1",
-     "text": "CT head is indicated for head trauma with red-flag features (loss of consciousness, vomiting, new neurological deficit, anticoagulant use).",
-     "score": 0.119
-    },
-    {
-     "clause_id": "GL-TKR-4.1",
-     "text": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.",
-     "score": 0.115
-    }
-   ],
-   "confidence": 0.85
-  },
-  "decision": "APPROVE",
-  "ai_decision": "APPROVE",
-  "confidence": 0.9,
-  "cited_clauses": [
-   "PLAN-2.1",
-   "PLAN-7.1",
-   "GL-MRI-3.1"
-  ],
-  "clause_text": {
-   "PLAN-2.1": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
-   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-   "GL-MRI-3.1": "Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy."
-  },
-  "human_review": {
-   "required": false,
-   "reviewer": null,
-   "verdict": null,
-   "notes": null
-  },
-  "letter": "Re: Pre-authorisation request, patient P-1001 (Case 2ff55de7)\nProvider: Dr. Rao, City Ortho (in-network)\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for MRI lumbar spine has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy.\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
-  "audit_log": [
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:55:18",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:55:18",
-    "action": "Structured request: MRI lumbar spine"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:55:18",
-    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:55:29",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:55:29",
-    "action": "COVERED_PRIOR_AUTH: PLAN-2.1, PLAN-7.1"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:55:29",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:55:29",
-    "action": "MET: GL-MRI-3.1"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:55:29",
-    "action": "FAN-IN: findings merged"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:55:34",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:55:34",
-    "action": "APPROVE (confidence 0.9) citing PLAN-2.1, PLAN-7.1, GL-MRI-3.1"
-   },
-   {
-    "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T22:55:39",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T22:55:39",
-    "action": "Drafted APPROVE letter"
-   }
-  ]
- },
- "5d330c8b": {
-  "case_id": "5d330c8b",
-  "created": "2026-11-15T22:55:39",
-  "raw_request": "Request total knee replacement for P-1002. Diagnosis: severe knee osteoarthritis, 4 months of failed conservative therapy. Provider: Dr. Kapoor (in-network).",
-  "status": "COMPLETED",
-  "parsed": {
-   "patient": "P-1002",
-   "treatment": "total knee replacement",
-   "diagnosis": "severe knee osteoarthritis, 4 months of failed conservative therapy",
-   "provider": "Dr. Kapoor (in-network)"
-  },
-  "coverage_findings": {
-   "status": "COVERED_PRIOR_AUTH",
-   "clauses": [
-    "PLAN-2.2",
-    "PLAN-7.1"
-   ],
-   "reason": "Covered service; prior authorisation required.",
-   "retrieved": [
-    {
-     "clause_id": "PLAN-4.3",
-     "text": "Services from out-of-network providers are excluded except in emergencies.",
-     "score": 0.245
-    },
-    {
-     "clause_id": "PLAN-2.1",
-     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+     "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
      "score": 0.169
     },
     {
-     "clause_id": "PLAN-2.2",
-     "text": "Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.",
-     "score": 0.145
-    },
-    {
-     "clause_id": "PLAN-7.2",
-     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
-     "score": 0.12
-    }
-   ],
-   "confidence": 0.9
-  },
-  "necessity_findings": {
-   "status": "MET",
-   "clauses": [
-    "GL-TKR-4.1"
-   ],
-   "reason": "Severe OA with 3+ months failed conservative care.",
-   "retrieved": [
-    {
-     "clause_id": "GL-TKR-4.1",
-     "text": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.",
-     "score": 0.619
-    },
-    {
-     "clause_id": "GL-KNEE-2.1",
-     "text": "Knee arthroscopy is indicated for meniscal tears with mechanical symptoms after failed conservative care. It is not indicated for degenerative osteoarthritis alone.",
-     "score": 0.319
-    },
-    {
-     "clause_id": "GL-MRI-3.1",
-     "text": "Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy.",
-     "score": 0.084
-    },
-    {
-     "clause_id": "GL-ONC-6.1",
-     "text": "Chemotherapy requires a histologically confirmed cancer diagnosis and a written oncologist treatment plan.",
-     "score": 0.071
-    }
-   ],
-   "confidence": 0.85
-  },
-  "decision": "APPROVE",
-  "ai_decision": "APPROVE",
-  "confidence": 0.9,
-  "cited_clauses": [
-   "PLAN-2.2",
-   "PLAN-7.1",
-   "GL-TKR-4.1"
-  ],
-  "clause_text": {
-   "PLAN-2.2": "Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.",
-   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-   "GL-TKR-4.1": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment."
-  },
-  "human_review": {
-   "required": false,
-   "reviewer": null,
-   "verdict": null,
-   "notes": null
-  },
-  "letter": "Re: Pre-authorisation request, patient P-1002 (Case 5d330c8b)\nProvider: Dr. Kapoor (in-network)\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for total knee replacement has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.2: Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-TKR-4.1: Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
-  "audit_log": [
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:55:44",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:55:44",
-    "action": "Structured request: total knee replacement"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:55:44",
-    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:55:49",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:55:49",
-    "action": "MET: GL-TKR-4.1"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:55:49",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:55:49",
-    "action": "COVERED_PRIOR_AUTH: PLAN-2.2, PLAN-7.1"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:55:49",
-    "action": "FAN-IN: findings merged"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:55:53",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:55:53",
-    "action": "APPROVE (confidence 0.9) citing PLAN-2.2, PLAN-7.1, GL-TKR-4.1"
-   },
-   {
-    "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T22:55:57",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T22:55:57",
-    "action": "Drafted APPROVE letter"
-   }
-  ]
- },
- "c235f44a": {
-  "case_id": "c235f44a",
-  "created": "2026-11-15T22:55:57",
-  "raw_request": "Request chemotherapy for P-1003. Diagnosis: biopsy-confirmed breast cancer. Written oncologist treatment plan attached. Provider: Dr. Nair, Metro Oncology (in-network).",
-  "status": "COMPLETED",
-  "parsed": {
-   "patient": "P-1003",
-   "treatment": "chemotherapy",
-   "diagnosis": "biopsy-confirmed breast cancer. Written oncologist treatment plan attached",
-   "provider": "Dr. Nair, Metro Oncology (in-network)"
-  },
-  "coverage_findings": {
-   "status": "COVERED_PRIOR_AUTH",
-   "clauses": [
-    "PLAN-3.1",
-    "PLAN-7.1"
-   ],
-   "reason": "Covered service; prior authorisation required.",
-   "retrieved": [
-    {
-     "clause_id": "PLAN-3.1",
-     "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
-     "score": 0.428
-    },
-    {
-     "clause_id": "PLAN-2.1",
-     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
-     "score": 0.178
-    },
-    {
-     "clause_id": "PLAN-7.2",
-     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
-     "score": 0.136
-    },
-    {
-     "clause_id": "PLAN-4.3",
-     "text": "Services from out-of-network providers are excluded except in emergencies.",
-     "score": 0.134
-    }
-   ],
-   "confidence": 0.9
-  },
-  "necessity_findings": {
-   "status": "MET",
-   "clauses": [
-    "GL-ONC-6.1"
-   ],
-   "reason": "Confirmed diagnosis and oncologist plan present.",
-   "retrieved": [
-    {
-     "clause_id": "GL-ONC-6.1",
-     "text": "Chemotherapy requires a histologically confirmed cancer diagnosis and a written oncologist treatment plan.",
-     "score": 0.628
-    },
-    {
-     "clause_id": "GL-TKR-4.1",
-     "text": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.",
-     "score": 0.072
-    },
-    {
-     "clause_id": "GL-MRI-3.1",
-     "text": "Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy.",
-     "score": 0.053
-    },
-    {
-     "clause_id": "GL-KNEE-2.1",
-     "text": "Knee arthroscopy is indicated for meniscal tears with mechanical symptoms after failed conservative care. It is not indicated for degenerative osteoarthritis alone.",
-     "score": 0.03
-    }
-   ],
-   "confidence": 0.85
-  },
-  "decision": "APPROVE",
-  "ai_decision": "APPROVE",
-  "confidence": 0.9,
-  "cited_clauses": [
-   "PLAN-3.1",
-   "PLAN-7.1",
-   "GL-ONC-6.1"
-  ],
-  "clause_text": {
-   "PLAN-3.1": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
-   "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-   "GL-ONC-6.1": "Chemotherapy requires a histologically confirmed cancer diagnosis and a written oncologist treatment plan."
-  },
-  "human_review": {
-   "required": false,
-   "reviewer": null,
-   "verdict": null,
-   "notes": null
-  },
-  "letter": "Re: Pre-authorisation request, patient P-1003 (Case c235f44a)\nProvider: Dr. Nair, Metro Oncology (in-network)\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for chemotherapy has been APPROVED.\n\nBasis for this decision:\n  - PLAN-3.1: Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-ONC-6.1: Chemotherapy requires a histologically confirmed cancer diagnosis and a written oncologist treatment plan.\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
-  "audit_log": [
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:56:01",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:56:01",
-    "action": "Structured request: chemotherapy"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:01",
-    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:56:06",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:56:06",
-    "action": "MET: GL-ONC-6.1"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:56:07",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:56:07",
-    "action": "COVERED_PRIOR_AUTH: PLAN-3.1, PLAN-7.1"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:07",
-    "action": "FAN-IN: findings merged"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:56:10",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:56:10",
-    "action": "APPROVE (confidence 0.9) citing PLAN-3.1, PLAN-7.1, GL-ONC-6.1"
-   },
-   {
-    "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T22:56:14",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T22:56:14",
-    "action": "Drafted APPROVE letter"
-   }
-  ]
- },
- "ddf18071": {
-  "case_id": "ddf18071",
-  "created": "2026-11-15T22:56:14",
-  "raw_request": "Request rhinoplasty for P-1005 to improve nose shape. No breathing problems or injury reported. Provider: Dr. Shah, Cosmetic Solutions.",
-  "status": "PENDING_HUMAN_REVIEW",
-  "parsed": {
-   "patient": "P-1005",
-   "treatment": "rhinoplasty",
-   "diagnosis": "",
-   "provider": "Dr. Shah, Cosmetic Solutions"
-  },
-  "coverage_findings": {
-   "status": "EXCLUDED",
-   "clauses": [
-    "PLAN-4.1"
-   ],
-   "reason": "Cosmetic procedure with no functional need is excluded.",
-   "retrieved": [
-    {
-     "clause_id": "PLAN-4.1",
-     "text": "Cosmetic procedures performed to improve appearance without a functional medical need are excluded.",
-     "score": 0.252
-    },
-    {
-     "clause_id": "PLAN-7.2",
-     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
-     "score": 0.187
-    },
-    {
-     "clause_id": "PLAN-4.2",
-     "text": "Experimental, investigational or unproven treatments are excluded.",
-     "score": 0.13
-    },
-    {
-     "clause_id": "PLAN-7.1",
-     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-     "score": 0.113
-    }
-   ],
-   "confidence": 0.9
-  },
-  "necessity_findings": {
-   "status": "NOT_APPLICABLE",
-   "clauses": [],
-   "reason": "Excluded by plan; no clinical review needed.",
-   "retrieved": [
-    {
      "clause_id": "GL-PT-7.1",
-     "text": "Physiotherapy is indicated after surgery or for musculoskeletal injury with a documented functional deficit.",
-     "score": 0.256
-    },
-    {
-     "clause_id": "GL-BAR-5.1",
-     "text": "Bariatric surgery is indicated for BMI 40 or above, or BMI 35 or above with a serious comorbidity, plus documented supervised weight-loss attempts.",
-     "score": 0.161
-    },
-    {
-     "clause_id": "GL-MRI-3.1",
-     "text": "Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy.",
-     "score": 0.153
-    },
-    {
-     "clause_id": "GL-KNEE-2.1",
-     "text": "Knee arthroscopy is indicated for meniscal tears with mechanical symptoms after failed conservative care. It is not indicated for degenerative osteoarthritis alone.",
-     "score": 0.044
-    }
-   ],
-   "confidence": 0.85
-  },
-  "decision": "DENY",
-  "ai_decision": "DENY",
-  "confidence": 0.93,
-  "cited_clauses": [
-   "PLAN-4.1"
-  ],
-  "clause_text": {
-   "PLAN-4.1": "Cosmetic procedures performed to improve appearance without a functional medical need are excluded."
-  },
-  "human_review": {
-   "required": true,
-   "reviewer": null,
-   "verdict": null,
-   "notes": null
-  },
-  "letter": "",
-  "audit_log": [
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:56:18",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:56:18",
-    "action": "Structured request: rhinoplasty"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:18",
-    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:56:22",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:56:22",
-    "action": "NOT_APPLICABLE: -"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:56:23",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:56:23",
-    "action": "EXCLUDED: PLAN-4.1"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:23",
-    "action": "FAN-IN: findings merged"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:56:26",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:56:26",
-    "action": "DENY (confidence 0.93) citing PLAN-4.1"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:26",
-    "action": "Routed to human peer reviewer (DENY)"
-   }
-  ]
- },
- "a7cbf633": {
-  "case_id": "a7cbf633",
-  "created": "2026-11-15T22:56:26",
-  "raw_request": "Request experimental stem-cell injection for knee osteoarthritis for P-1006. Treatment is investigational and not FDA-approved. Provider: Dr. Kim.",
-  "status": "PENDING_HUMAN_REVIEW",
-  "parsed": {
-   "patient": "P-1006",
-   "treatment": "experimental stem-cell injection",
-   "diagnosis": "",
-   "provider": "Dr. Kim"
-  },
-  "coverage_findings": {
-   "status": "EXCLUDED",
-   "clauses": [
-    "PLAN-4.2"
-   ],
-   "reason": "Experimental/investigational treatment is excluded.",
-   "retrieved": [
-    {
-     "clause_id": "PLAN-4.2",
-     "text": "Experimental, investigational or unproven treatments are excluded.",
-     "score": 0.291
-    },
-    {
-     "clause_id": "PLAN-7.1",
-     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-     "score": 0.236
-    },
-    {
-     "clause_id": "PLAN-3.1",
-     "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
-     "score": 0.153
-    },
-    {
-     "clause_id": "PLAN-2.1",
-     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
-     "score": 0.135
-    }
-   ],
-   "confidence": 0.9
-  },
-  "necessity_findings": {
-   "status": "NOT_APPLICABLE",
-   "clauses": [],
-   "reason": "Excluded by plan; no clinical review needed.",
-   "retrieved": [
-    {
-     "clause_id": "GL-KNEE-2.1",
-     "text": "Knee arthroscopy is indicated for meniscal tears with mechanical symptoms after failed conservative care. It is not indicated for degenerative osteoarthritis alone.",
-     "score": 0.353
-    },
-    {
-     "clause_id": "GL-TKR-4.1",
-     "text": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.",
-     "score": 0.258
-    },
-    {
-     "clause_id": "GL-ONC-6.1",
-     "text": "Chemotherapy requires a histologically confirmed cancer diagnosis and a written oncologist treatment plan.",
-     "score": 0.171
-    },
-    {
-     "clause_id": "GL-MRI-3.2",
-     "text": "Routine MRI is not indicated for acute uncomplicated low back pain lasting under 6 weeks without red-flag features.",
-     "score": 0.122
-    }
-   ],
-   "confidence": 0.85
-  },
-  "decision": "DENY",
-  "ai_decision": "DENY",
-  "confidence": 0.93,
-  "cited_clauses": [
-   "PLAN-4.2"
-  ],
-  "clause_text": {
-   "PLAN-4.2": "Experimental, investigational or unproven treatments are excluded."
-  },
-  "human_review": {
-   "required": true,
-   "reviewer": null,
-   "verdict": null,
-   "notes": null
-  },
-  "letter": "",
-  "audit_log": [
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:56:31",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:56:31",
-    "action": "Structured request: experimental stem-cell injection"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:31",
-    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:56:36",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:56:36",
-    "action": "EXCLUDED: PLAN-4.2"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:56:36",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:56:36",
-    "action": "NOT_APPLICABLE: -"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:36",
-    "action": "FAN-IN: findings merged"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:56:40",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:56:40",
-    "action": "DENY (confidence 0.93) citing PLAN-4.2"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:40",
-    "action": "Routed to human peer reviewer (DENY)"
-   }
-  ]
- },
- "9b3dfde2": {
-  "case_id": "9b3dfde2",
-  "created": "2026-11-15T22:56:40",
-  "raw_request": "Request knee surgery for P-1009. Diagnosis: knee pain. No imaging results, no history of conservative treatment provided. Provider: Dr. unknown.",
-  "status": "PENDING_HUMAN_REVIEW",
-  "parsed": {
-   "patient": "P-1009",
-   "treatment": "knee surgery",
-   "diagnosis": "knee pain. No imaging results, no history of conservative treatment provided",
-   "provider": "Dr. unknown"
-  },
-  "coverage_findings": {
-   "status": "COVERED_PRIOR_AUTH",
-   "clauses": [
-    "PLAN-2.2",
-    "PLAN-7.1"
-   ],
-   "reason": "Covered service; prior authorisation required.",
-   "retrieved": [
-    {
-     "clause_id": "PLAN-7.1",
-     "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-     "score": 0.284
-    },
-    {
-     "clause_id": "PLAN-3.1",
-     "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
-     "score": 0.149
-    },
-    {
-     "clause_id": "PLAN-7.2",
-     "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
-     "score": 0.13
-    },
-    {
-     "clause_id": "PLAN-2.1",
-     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
-     "score": 0.129
-    }
-   ],
-   "confidence": 0.9
-  },
-  "necessity_findings": {
-   "status": "INSUFFICIENT",
-   "clauses": [
-    "GL-KNEE-2.1"
-   ],
-   "reason": "Clinical documentation is missing, so criteria cannot be assessed.",
-   "retrieved": [
-    {
-     "clause_id": "GL-TKR-4.1",
-     "text": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.",
-     "score": 0.285
-    },
-    {
-     "clause_id": "GL-KNEE-2.1",
-     "text": "Knee arthroscopy is indicated for meniscal tears with mechanical symptoms after failed conservative care. It is not indicated for degenerative osteoarthritis alone.",
-     "score": 0.279
-    },
-    {
-     "clause_id": "GL-ONC-6.1",
-     "text": "Chemotherapy requires a histologically confirmed cancer diagnosis and a written oncologist treatment plan.",
-     "score": 0.145
-    },
-    {
-     "clause_id": "GL-MRI-3.1",
-     "text": "Lumbar spine MRI is indicated for low back pain with red-flag features (e.g. neurological deficit, suspected infection or cancer), or when pain persists 6 weeks or more despite documented conservative therapy.",
-     "score": 0.125
-    }
-   ],
-   "confidence": 0.6
-  },
-  "decision": "MORE_INFO",
-  "ai_decision": "MORE_INFO",
-  "confidence": 0.7,
-  "cited_clauses": [
-   "PLAN-7.2",
-   "GL-KNEE-2.1"
-  ],
-  "clause_text": {
-   "PLAN-7.2": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
-   "GL-KNEE-2.1": "Knee arthroscopy is indicated for meniscal tears with mechanical symptoms after failed conservative care. It is not indicated for degenerative osteoarthritis alone."
-  },
-  "human_review": {
-   "required": true,
-   "reviewer": null,
-   "verdict": null,
-   "notes": null
-  },
-  "letter": "",
-  "audit_log": [
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:56:45",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Request Parser",
-    "timestamp": "2026-11-15T22:56:45",
-    "action": "Structured request: knee surgery"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:45",
-    "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:56:50",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T22:56:50",
-    "action": "COVERED_PRIOR_AUTH: PLAN-2.2, PLAN-7.1"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:56:50",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T22:56:50",
-    "action": "INSUFFICIENT: GL-KNEE-2.1"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:50",
-    "action": "FAN-IN: findings merged"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:56:54",
-    "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
-   },
-   {
-    "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T22:56:54",
-    "action": "MORE_INFO (confidence 0.7) citing PLAN-7.2, GL-KNEE-2.1"
-   },
-   {
-    "agent": "Orchestrator",
-    "timestamp": "2026-11-15T22:56:54",
-    "action": "Routed to human peer reviewer (MORE_INFO)"
-   }
-  ]
- },
- "ad3461ab": {
-  "case_id": "ad3461ab",
-  "created": "2026-11-15T23:01:05",
-  "raw_request": "Request total knee replacement for P-1002. Diagnosis: severe knee osteoarthritis, 4 months of failed conservative treatment, significant walking impairment. Provider: Dr. Mehta, Apex Hospital (in-network).",
-  "status": "COMPLETED",
-  "parsed": {
-   "patient": "P-1002",
-   "treatment": "total knee replacement",
-   "diagnosis": "severe knee osteoarthritis, 4 months of failed conservative treatment, significant walking impairment",
-   "provider": "Dr. Mehta, Apex Hospital (in-network)"
-  },
-  "coverage_findings": {
-   "status": "COVERED_PRIOR_AUTH",
-   "clauses": [
-    "PLAN-2.2",
-    "PLAN-7.1"
-   ],
-   "reason": "Covered service; prior authorisation required.",
-   "retrieved": [
-    {
-     "clause_id": "PLAN-4.3",
-     "text": "Services from out-of-network providers are excluded except in emergencies.",
-     "score": 0.232
-    },
-    {
-     "clause_id": "PLAN-2.1",
-     "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
-     "score": 0.16
-    },
-    {
-     "clause_id": "PLAN-2.2",
-     "text": "Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.",
-     "score": 0.138
-    },
-    {
-     "clause_id": "PLAN-3.1",
-     "text": "Chemotherapy and related oncology treatment are covered with prior authorisation when prescribed under an oncologist's treatment plan.",
-     "score": 0.129
-    }
-   ],
-   "confidence": 0.9
-  },
-  "necessity_findings": {
-   "status": "MET",
-   "clauses": [
-    "GL-TKR-4.1"
-   ],
-   "reason": "Severe OA with 3+ months failed conservative care.",
-   "retrieved": [
-    {
-     "clause_id": "GL-TKR-4.1",
-     "text": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.",
-     "score": 0.7
-    },
-    {
-     "clause_id": "GL-KNEE-2.1",
-     "text": "Knee arthroscopy is indicated for meniscal tears with mechanical symptoms after failed conservative care. It is not indicated for degenerative osteoarthritis alone.",
-     "score": 0.304
-    },
-    {
-     "clause_id": "GL-ONC-6.1",
-     "text": "Chemotherapy requires a histologically confirmed cancer diagnosis and a written oncologist treatment plan.",
-     "score": 0.115
-    },
-    {
-     "clause_id": "GL-CT-8.1",
-     "text": "CT head is indicated for head trauma with red-flag features (loss of consciousness, vomiting, new neurological deficit, anticoagulant use).",
-     "score": 0.051
+     "text": "Physical therapy is medically indicated following orthopedic surgery, acute musculoskeletal trauma, or documented functional deficit causing significant limitation in activities of daily living.",
+     "score": 0.148
     }
    ],
    "confidence": 0.85
@@ -1129,14 +75,14 @@
   "ai_decision": "APPROVE",
   "confidence": 0.9,
   "cited_clauses": [
-   "PLAN-2.2",
+   "PLAN-2.1",
    "PLAN-7.1",
-   "GL-TKR-4.1"
+   "GL-MRI-3.1"
   ],
   "clause_text": {
-   "PLAN-2.2": "Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.",
+   "PLAN-2.1": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
    "PLAN-7.1": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
-   "GL-TKR-4.1": "Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment."
+   "GL-MRI-3.1": "Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication)."
   },
   "human_review": {
    "required": false,
@@ -1144,67 +90,196 @@
    "verdict": null,
    "notes": null
   },
-  "letter": "Re: Pre-authorisation request, patient P-1002 (Case ad3461ab)\nProvider: Dr. Mehta, Apex Hospital (in-network)\n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for total knee replacement has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.2: Inpatient and outpatient surgery, including arthroscopy and joint replacement, is covered when medically necessary. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-TKR-4.1: Total knee replacement is indicated for severe osteoarthritis with functional impairment after at least 3 months of failed conservative treatment.\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+  "letter": "Re: Pre-authorisation request, patient P-1001 (Case f9a3cef4)\nProvider: \n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for knee MRI has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
   "audit_log": [
    {
+    "agent": "Orchestrator",
+    "timestamp": "2026-11-18T00:10:52",
+    "action": "Case initiated. Running Request Parser..."
+   },
+   {
     "agent": "Request Parser",
-    "timestamp": "2026-11-15T23:01:11",
+    "timestamp": "2026-11-18T00:11:08",
     "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
    },
    {
     "agent": "Request Parser",
-    "timestamp": "2026-11-15T23:01:11",
-    "action": "Structured request: total knee replacement"
+    "timestamp": "2026-11-18T00:11:08",
+    "action": "Structured request: knee MRI"
    },
    {
     "agent": "Orchestrator",
-    "timestamp": "2026-11-15T23:01:11",
+    "timestamp": "2026-11-18T00:11:08",
     "action": "FAN-OUT: Coverage Retrieval and Medical Necessity in parallel"
    },
    {
     "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T23:01:20",
+    "timestamp": "2026-11-18T00:11:20",
     "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
    },
    {
     "agent": "Medical Necessity",
-    "timestamp": "2026-11-15T23:01:20",
-    "action": "MET: GL-TKR-4.1"
+    "timestamp": "2026-11-18T00:11:20",
+    "action": "MET: GL-MRI-3.1"
    },
    {
     "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T23:01:21",
+    "timestamp": "2026-11-18T00:11:20",
     "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
    },
    {
     "agent": "Coverage Retrieval",
-    "timestamp": "2026-11-15T23:01:21",
-    "action": "COVERED_PRIOR_AUTH: PLAN-2.2, PLAN-7.1"
+    "timestamp": "2026-11-18T00:11:20",
+    "action": "COVERED_PRIOR_AUTH: PLAN-2.1, PLAN-7.1"
    },
    {
     "agent": "Orchestrator",
-    "timestamp": "2026-11-15T23:01:21",
-    "action": "FAN-IN: findings merged"
+    "timestamp": "2026-11-18T00:11:20",
+    "action": "FAN-IN: merging coverage and necessity findings"
    },
    {
     "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T23:01:27",
+    "timestamp": "2026-11-18T00:11:28",
     "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
    },
    {
     "agent": "Authorisation Manager",
-    "timestamp": "2026-11-15T23:01:27",
-    "action": "APPROVE (confidence 0.9) citing PLAN-2.2, PLAN-7.1, GL-TKR-4.1"
+    "timestamp": "2026-11-18T00:11:28",
+    "action": "APPROVE (confidence 0.9) citing PLAN-2.1, PLAN-7.1, GL-MRI-3.1"
    },
    {
     "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T23:01:32",
+    "timestamp": "2026-11-18T00:11:36",
     "action": "LLM failed (ClientError: 401 UNAUTHENTICATED. {'error': {'code': 401, 'message': 'API key not valid. Plea); used rule fallback"
    },
    {
     "agent": "Letter Drafter",
-    "timestamp": "2026-11-15T23:01:32",
+    "timestamp": "2026-11-18T00:11:36",
     "action": "Drafted APPROVE letter"
+   }
+  ],
+  "history": [
+   {
+    "field": "parsed",
+    "value": {
+     "patient": "P-1001",
+     "treatment": "knee MRI",
+     "diagnosis": "",
+     "provider": ""
+    },
+    "written_by": "Request Parser",
+    "timestamp": "2026-11-18T00:11:08"
+   },
+   {
+    "field": "coverage_findings",
+    "value": {
+     "status": "COVERED_PRIOR_AUTH",
+     "clauses": [
+      "PLAN-2.1",
+      "PLAN-7.1"
+     ],
+     "reason": "Covered service; prior authorisation required.",
+     "retrieved": [
+      {
+       "clause_id": "PLAN-2.1",
+       "text": "Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.",
+       "score": 0.173
+      },
+      {
+       "clause_id": "PLAN-7.2",
+       "text": "If a request lacks the clinical documentation needed to assess it, the plan must request additional information before deciding.",
+       "score": 0.15
+      },
+      {
+       "clause_id": "PLAN-7.1",
+       "text": "Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.",
+       "score": 0.116
+      },
+      {
+       "clause_id": "PLAN-2.3",
+       "text": "Physiotherapy is covered up to 20 sessions per plan year with a physician referral.",
+       "score": 0.072
+      }
+     ],
+     "confidence": 0.9
+    },
+    "written_by": "Coverage Retrieval",
+    "timestamp": "2026-11-18T00:11:20"
+   },
+   {
+    "field": "necessity_findings",
+    "value": {
+     "status": "MET",
+     "clauses": [
+      "GL-MRI-3.1"
+     ],
+     "reason": "Pain persisted 6+ weeks or red flags present.",
+     "retrieved": [
+      {
+       "clause_id": "GL-KNEE-2.2",
+       "text": "Knee MRI is indicated for persistent knee pain lasting 6 weeks or more despite documented conservative management, or immediately following acute severe knee trauma with inability to bear weight.",
+       "score": 0.306
+      },
+      {
+       "clause_id": "GL-KNEE-2.1",
+       "text": "Knee arthroscopy is indicated for meniscal tears with persistent mechanical symptoms (joint locking, catching, or giving way) after at least 6 weeks of failed conservative care; it is not indicated for degenerative osteoarthritis alone in the absence of mechanical obstruction.",
+       "score": 0.235
+      },
+      {
+       "clause_id": "GL-MRI-3.2",
+       "text": "Routine MRI of the lumbar spine is not indicated for acute uncomplicated low back pain lasting under 6 weeks without documented red-flag features.",
+       "score": 0.169
+      },
+      {
+       "clause_id": "GL-PT-7.1",
+       "text": "Physical therapy is medically indicated following orthopedic surgery, acute musculoskeletal trauma, or documented functional deficit causing significant limitation in activities of daily living.",
+       "score": 0.148
+      }
+     ],
+     "confidence": 0.85
+    },
+    "written_by": "Medical Necessity",
+    "timestamp": "2026-11-18T00:11:20"
+   },
+   {
+    "field": "decision",
+    "value": "APPROVE",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:11:28"
+   },
+   {
+    "field": "ai_decision",
+    "value": "APPROVE",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:11:28"
+   },
+   {
+    "field": "confidence",
+    "value": 0.9,
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:11:28"
+   },
+   {
+    "field": "cited_clauses",
+    "value": [
+     "PLAN-2.1",
+     "PLAN-7.1",
+     "GL-MRI-3.1"
+    ],
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:11:28"
+   },
+   {
+    "field": "status",
+    "value": "COMPLETED",
+    "written_by": "Authorisation Manager",
+    "timestamp": "2026-11-18T00:11:28"
+   },
+   {
+    "field": "letter",
+    "value": "Re: Pre-authorisation request, patient P-1001 (Case f9a3cef4)\nProvider: \n\nDear Provider,\n\nWe are pleased to confirm that pre-authorisation for knee MRI has been APPROVED.\n\nBasis for this decision:\n  - PLAN-2.1: Diagnostic imaging (MRI, CT, PET) is covered when medically necessary and ordered by an in-network provider. Prior authorisation is required.\n  - PLAN-7.1: Prior authorisation is required for imaging, surgery, bariatric procedures, and specialty drugs.\n  - GL-MRI-3.1: Lumbar spine MRI is indicated for low back pain accompanied by documented red-flag features (severe or progressive neurological deficit, suspected cauda equina syndrome, suspected spinal infection, or malignancy), or when persistent pain lasts 6 weeks or more despite documented adherence to conservative therapy (physiotherapy, medication).\n\nYou may appeal this decision or resubmit with further documentation.\n\nSincerely,\nSynthCare Utilisation Management",
+    "written_by": "Letter Drafter",
+    "timestamp": "2026-11-18T00:11:36"
    }
   ]
  }

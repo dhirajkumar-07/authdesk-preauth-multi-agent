@@ -1,5 +1,8 @@
 import re
-from ..case_record import log
+try:
+    from ..case_record import log
+except (ImportError, ValueError):
+    from case_record import log
 async def _rules(c):
     t = c["raw_request"]
     g = lambda p: (re.search(p, t, re.I | re.S) or [None, ""])[1].strip(" .")
@@ -8,7 +11,10 @@ async def _rules(c):
                    "diagnosis": g(r"diagnosis:\s*(.+?)(?:\.\s*provider:|provider:|$)"), "provider": g(r"provider:\s*(.+)$")}
     log(c, "Request Parser", f"Structured request: {treat}")
 
-from .. import llm
+try:
+    from .. import llm
+except (ImportError, ValueError):
+    import llm
 async def _llm(c):
     r = await llm.ask_json("You are the Request Parser agent for a health insurer. Extract from the pre-authorisation request: "
         '{"patient": str, "treatment": str, "diagnosis": str, "provider": str}. Use "" if absent. Do not invent facts.', c["raw_request"])

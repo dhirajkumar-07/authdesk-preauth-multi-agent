@@ -668,19 +668,45 @@
     .ag.run {
       opacity: 1;
       border-color: var(--cyan);
-      box-shadow: 0 0 26px rgba(34, 211, 238, 0.4);
+      box-shadow: 0 0 30px rgba(34, 211, 238, 0.7), inset 0 0 16px rgba(34, 211, 238, 0.15);
+      background: rgba(34, 211, 238, 0.08);
+      transform: scale(1.025);
       animation: pulseAg 1s infinite alternate;
     }
     .ag.done {
       opacity: 1;
-      border-color: rgba(52, 211, 153, 0.45);
-      background: rgba(52, 211, 153, 0.04);
+      border-color: rgba(52, 211, 153, 0.55);
+      background: rgba(52, 211, 153, 0.05);
+      box-shadow: 0 0 14px rgba(52, 211, 153, 0.18);
     }
     @keyframes pulseAg {
-      from { box-shadow: 0 0 10px rgba(34, 211, 238, 0.2); }
-      to { box-shadow: 0 0 28px rgba(34, 211, 238, 0.6); }
+      from { box-shadow: 0 0 12px rgba(34, 211, 238, 0.3); }
+      to { box-shadow: 0 0 32px rgba(34, 211, 238, 0.75); }
     }
-    .ag h4 { font-size: 14px; display: flex; align-items: center; gap: 8px; }
+    .ag h4 { font-size: 14px; display: flex; align-items: center; gap: 8px; width: 100%; }
+    .ag .status-pill {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.06);
+      color: #94A3B8;
+      transition: all 0.3s;
+    }
+    .ag.run .status-pill {
+      background: rgba(34, 211, 238, 0.25);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
+      border: 1px solid var(--cyan);
+    }
+    .ag.done .status-pill {
+      background: rgba(52, 211, 153, 0.2);
+      color: #34D399;
+      border: 1px solid rgba(52, 211, 153, 0.4);
+    }
     .dot { width: 8px; height: 8px; border-radius: 50%; background: #475569; }
     .ag.run .dot { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
     .ag.done .dot { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
@@ -692,11 +718,214 @@
     /* Case Columns */
     .case-cols {
       display: grid;
-      grid-template-columns: 1fr 1.15fr 1.35fr;
+      grid-template-columns: 360px 1fr;
       gap: 20px;
     }
     @media (max-width: 1100px) {
       .case-cols { grid-template-columns: 1fr; }
+    }
+
+    /* Step-by-Step Agent Stepper Navigation */
+    .step-nav-deck {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+      background: var(--c2);
+      border: 1px solid var(--b);
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+    .step-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .step-pills-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .step-pill-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--b);
+      background: rgba(255, 255, 255, 0.03);
+      color: #94A3B8;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+    }
+    .step-pill-btn:hover {
+      border-color: rgba(34, 211, 238, 0.4);
+      color: #fff;
+      background: rgba(34, 211, 238, 0.06);
+    }
+    .step-pill-btn.active {
+      border-color: var(--cyan);
+      background: rgba(34, 211, 238, 0.15);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(34, 211, 238, 0.3);
+    }
+    .step-pill-btn.done {
+      border-color: rgba(52, 211, 153, 0.4);
+      color: #A7F3D0;
+    }
+    .step-badge-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .step-pill-btn.active .step-badge-num {
+      background: var(--cyan);
+      color: #070514;
+    }
+    .step-pill-btn.done .step-badge-num {
+      background: var(--ok);
+      color: #070514;
+    }
+    .step-ctrls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Benchmark Grid */
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 10px;
+      margin: 10px 0 18px;
+    }
+    .benchmark-pill {
+      background: var(--c2);
+      border: 1px solid var(--b);
+      border-radius: 10px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+    .benchmark-pill:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .benchmark-pill.selected {
+      border-color: var(--cyan);
+      background: rgba(34, 211, 238, 0.1);
+      box-shadow: 0 0 14px rgba(34, 211, 238, 0.25);
+    }
+    .benchmark-pill .b-id {
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--cyan);
+    }
+    .benchmark-pill .b-title {
+      font-size: 12px;
+      color: #E2E8F0;
+      margin: 4px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 600;
+    }
+
+    /* Agent Inspection Cards */
+    .agent-deck {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .agent-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--b);
+      border-radius: 12px;
+      padding: 16px;
+      transition: border-color 0.2s;
+    }
+    .agent-box:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .agent-box-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .provenance-entry {
+      background: rgba(124, 58, 237, 0.08);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: 10px;
+      padding: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #DDD6FE;
+      margin-top: 6px;
+    }
+    .criteria-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .criteria-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.25);
+      font-size: 13px;
+    }
+    .criteria-item.met {
+      border-left: 3px solid var(--ok);
+      color: #A7F3D0;
+    }
+    .criteria-item.not-met {
+      border-left: 3px solid var(--no);
+      color: #FECDD3;
+    }
+    .criteria-item.unclear {
+      border-left: 3px solid var(--mid);
+      color: #FDE68A;
+    }
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    .ledger-table th, .ledger-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .ledger-table th {
+      color: var(--cyan);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      background: rgba(0,0,0,0.2);
     }
 
     .chip {
@@ -885,7 +1114,7 @@
   <nav id="navbar">
     <div class="brand" onclick="go('home')">
       <span><span class="grad">Auth</span>Desk</span>
-      <span class="brand-badge">Q24</span>
+      <span class="brand-badge">v2.0</span>
     </div>
     <div class="nav-links">
       <a data-v="home" onclick="go('home')" class="on">Overview</a>
@@ -907,12 +1136,11 @@
       <div class="hero-split">
         <div class="hero-left">
           <div class="tags-row">
-            <span class="hero-tag accent">Q24</span>
-            <span class="hero-tag accent">Group 24</span>
-            <span class="hero-tag">CSE476 - Task 2 (Project 2)</span>
-            <span class="hero-tag">CO3 &amp; CO4</span>
-            <span class="hero-tag">Bloom's L4, L5, L6</span>
-            <span class="hero-tag">30 Marks</span>
+            <span class="hero-tag accent">Multi-Agent System</span>
+            <span class="hero-tag accent">Healthcare AI</span>
+            <span class="hero-tag">ChromaDB Vector RAG</span>
+            <span class="hero-tag">Parallel Fan-Out &amp; Fan-In</span>
+            <span class="hero-tag">Human-in-the-Loop</span>
           </div>
           <h1 class="hero-title">Treatment Pre-Authorisation <span class="grad">Decision Desk</span></h1>
           <p class="hero-desc">
@@ -1000,8 +1228,8 @@
       <!-- 3. Objective Statement -->
       <div class="card" style="margin-bottom: 24px;">
         <div class="sec-head">
-          <span class="tag">Coursework Objective</span>
-          <h2>Project Objective</h2>
+          <span class="tag">System Mission</span>
+          <h2>Core System Objective</h2>
         </div>
         <p style="font-size: 16px; color: #E2E8F0; line-height: 1.7; border-left: 3px solid var(--cyan); padding-left: 16px;">
           "To design, build, and demonstrate a working prototype of a multi-agent system that automates a real-world workflow, by applying a defined coordination architecture, framework-based agent development (Microsoft Agent Framework or Semantic Kernel), grounded retrieval or shared memory, and collaborative task execution across specialised agents."
@@ -1011,8 +1239,8 @@
       <!-- 4. Group Members Table -->
       <div class="card" style="margin-bottom: 24px;">
         <div class="sec-head">
-          <span class="tag">Academic Details</span>
-          <h2>Group Members (Group 24)</h2>
+          <span class="tag">Engineering Team</span>
+          <h2>Project Contributors</h2>
         </div>
         <table>
           <thead>
@@ -1209,47 +1437,75 @@
         <h2>Submit New Pre-Authorisation Request</h2>
       </div>
       <div class="card">
-        <label style="font-weight:600; font-size:14px; color:#fff;">Load Benchmark Test Case</label>
+        <label style="font-weight:600; font-size:14px; color:#fff; display:flex; justify-content:space-between; align-items:center;">
+          <span>⚡ Quick-Select Benchmark Cases (10 Test Requests)</span>
+          <span style="font-size:12px; color:var(--cyan); font-weight:normal;">Click any card to auto-populate request</span>
+        </label>
+        <div class="benchmark-grid" id="benchmarkGrid">
+          <!-- Dynamically filled with REQ-01 through REQ-10 -->
+        </div>
+
+        <label style="font-weight:600; font-size:14px; color:#fff; margin-top:10px;">Or Choose from Dropdown</label>
         <select id="sample" onchange="document.getElementById('req').value = this.value">
           <option value="">Choose a benchmark sample case...</option>
         </select>
 
-        <label style="font-weight:600; font-size:14px; color:#fff;">Clinical Request Free Text</label>
-        <textarea id="req" rows="6" placeholder="e.g. Request MRI lumbar spine for patient P-1001. Diagnosis: chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy. Provider: Dr. Rao, City Ortho (in-network)."></textarea>
+        <label style="font-weight:600; font-size:14px; color:#fff; margin-top:14px;">Clinical Request Free Text</label>
+        <textarea id="req" rows="5" placeholder="e.g. Request MRI lumbar spine for patient P-1001. Diagnosis: chronic low back pain for 8 weeks, failed 6 weeks of physiotherapy. Provider: Dr. Rao, City Ortho (in-network)."></textarea>
 
-        <div style="display:flex; gap:14px; align-items:center;">
+        <div style="display:flex; gap:14px; align-items:center; margin-top:14px; flex-wrap:wrap;">
           <button class="btn" onclick="submitCase()">Run Multi-Agent Desk &rarr;</button>
-          <span style="font-size:13px; color:var(--t)">Agents will parse, retrieve clauses, decide, and draft the letter.</span>
+          <span style="font-size:13px; color:var(--t)">Agents will parse, retrieve clauses via RAG, decide, and draft the letter step-by-step.</span>
         </div>
       </div>
     </section>
 
     <!-- ============================================================ -->
-    <!-- CASE WORKSPACE PAGE (HERO 3-COLUMNS)                        -->
+    <!-- CASE WORKSPACE PAGE (STEP-BY-STEP AGENT DESK)               -->
     <!-- ============================================================ -->
     <section id="case" class="hide">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-        <button class="btn ghost sm" onclick="go('dash')">&larr; Back to Dashboard</button>
-        <span id="caseHeaderBadge" class="badge COMPLETED">Case Active</span>
+      <!-- Step Navigation Deck -->
+      <div class="step-nav-deck" id="stepNavDeck">
+        <div class="step-nav-header">
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <button class="btn ghost sm" onclick="go('dash')">&larr; Dashboard</button>
+            <span id="caseHeaderBadge" class="badge COMPLETED">Case Active</span>
+            <span id="activeStepTitle" style="font-size:15px; font-weight:700; color:#fff;">Step 1: Request Parser</span>
+          </div>
+          <div class="step-ctrls">
+            <button class="btn ghost sm" id="btnPrevStep" onclick="prevStep()">&larr; Prev Agent</button>
+            <button class="btn sm" id="btnNextStep" onclick="nextStep()">Next Agent &rarr;</button>
+            <button class="btn ghost sm" id="btnAutoPlay" onclick="toggleAutoPlay()">▶️ Auto-Play</button>
+            <button class="btn ghost sm" onclick="resetSteps()">🔄 Restart</button>
+            <button class="btn ghost sm" onclick="setStep(7)">📊 Full Dossier</button>
+          </div>
+        </div>
+        <div class="step-pills-row" id="stepPillsRow"></div>
       </div>
 
       <div class="case-cols">
-        <!-- Col 1: Request & Extracted Entities -->
-        <div class="card">
-          <h3 style="margin-bottom: 12px;">Raw Request</h3>
-          <p id="raw" style="font-size:13px; color:#CBD5E1; line-height:1.6; margin-bottom: 16px; background:rgba(0,0,0,0.3); padding:12px; border-radius:10px;"></p>
-          <h4 style="margin-bottom: 8px;">Parsed Clinical Entities</h4>
-          <div id="parsed"></div>
+        <!-- Col 1: Overview, Entities, Clickable Agent Pipeline -->
+        <div class="card" style="display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <h4 style="margin-bottom: 8px; color:var(--cyan); font-size:12px; text-transform:uppercase; letter-spacing:0.05em;">Clinical Submission</h4>
+            <p id="raw" style="font-size:13px; color:#CBD5E1; line-height:1.6; background:rgba(0,0,0,0.3); padding:12px; border-radius:10px;"></p>
+          </div>
+
+          <div>
+            <h4 style="margin-bottom: 8px; color:var(--cyan); font-size:12px; text-transform:uppercase; letter-spacing:0.05em;">Parsed Entities</h4>
+            <div id="parsed"></div>
+          </div>
+
+          <div>
+            <h4 style="margin-bottom: 8px; color:var(--cyan); font-size:12px; text-transform:uppercase; letter-spacing:0.05em;">Agent Architecture (Click to inspect)</h4>
+            <div class="pipe" id="pipe"></div>
+          </div>
         </div>
 
-        <!-- Col 2: Live Pipeline Animation -->
-        <div class="card">
-          <h3 style="margin-bottom: 14px;">Live Agent Pipeline</h3>
-          <div class="pipe" id="pipe"></div>
+        <!-- Col 2: Active Agent Respective Work Inspector -->
+        <div class="card" id="stepInspector">
+          <!-- Dynamically populated by renderStep(currentStep) -->
         </div>
-
-        <!-- Col 3: Findings, Decision, Clauses, Letter & Record -->
-        <div class="card" id="result"></div>
       </div>
     </section>
 
@@ -1285,8 +1541,8 @@
 
   <!-- Footer -->
   <footer>
-    <p><b>AuthDesk</b> &bull; CSE476 Agentic AI and Intelligent Automation &bull; Q24, Group 24</p>
-    <p style="margin-top:6px;">Ansh Ojha (12312163) &bull; Nitin Sheshma (12326213) &bull; Dhiraj Kumar (12320690)</p>
+    <p><b>AuthDesk</b> &bull; Treatment Pre-Authorisation Decision Desk &bull; Multi-Agent Healthcare Utilization System</p>
+    <p style="margin-top:6px;">Ansh Ojha &bull; Nitin Sheshma &bull; Dhiraj Kumar</p>
   </footer>
 
   <script>
@@ -1497,13 +1753,41 @@
     const statsEl = $('statsBand');
     if (statsEl) statsObserver.observe(statsEl);
 
-    // Load Samples into Dropdown
+    // Load Samples into Dropdown and Benchmark Grid
     async function loadSamples() {
       try {
         const s = await api('/samples');
+        window._samplesList = s;
         $('sample').innerHTML = '<option value="">Choose a benchmark sample case...</option>' +
           s.map(x => `<option value="${esc(x.request)}">${x.id} &mdash; ${esc(x.request.slice(0, 50))}... (Expected: ${x.expected_decision})</option>`).join('');
+
+        const grid = $('benchmarkGrid');
+        if (grid) {
+          grid.innerHTML = s.map((x, i) => {
+            const treatment = (x.request.match(/request\s+([^for\.\,]+)/i) || [null, 'Clinical Request'])[1].trim();
+            return `
+              <div class="benchmark-pill" onclick="selectSample(${i})">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="b-id">${x.id}</span>
+                  <span class="badge ${x.expected_decision}" style="font-size:10px; padding:2px 6px;">${x.expected_decision}</span>
+                </div>
+                <div class="b-title" title="${esc(treatment)}">${esc(treatment)}</div>
+                <div style="font-size:11px; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${esc(x.request.slice(0, 42))}...</div>
+              </div>
+            `;
+          }).join('');
+        }
       } catch (e) {}
+    }
+
+    function selectSample(idx) {
+      const s = window._samplesList && window._samplesList[idx];
+      if (!s) return;
+      $('req').value = s.request;
+      document.querySelectorAll('.benchmark-pill').forEach((el, i) => {
+        el.classList.toggle('selected', i === idx);
+      });
+      toast(`Loaded ${s.id} (Expected: ${s.expected_decision})`);
     }
 
     // Load Dashboard
@@ -1668,7 +1952,104 @@
       ['Letter Drafter', 'Letter Drafter']
     ];
 
+    const STEPS_DATA = [
+      { num: 1, id: 'parser', name: 'Request Parser', icon: '🔍', desc: 'Clinical entity extraction from free text' },
+      { num: 2, id: 'coverage', name: 'Coverage Retrieval', icon: '📋', desc: 'Vector RAG search over Gold-500 plan benefits' },
+      { num: 3, id: 'necessity', name: 'Medical Necessity', icon: '🩺', desc: 'Vector RAG search over clinical guidelines' },
+      { num: 4, id: 'manager', name: 'Authorisation Manager', icon: '🎯', desc: 'Fan-In synthesis & determination arbitration' },
+      { num: 5, id: 'review', name: 'Clinical Peer Review', icon: '👨‍⚕️', desc: 'Physician escalation for adverse decisions (PLAN-7.3)' },
+      { num: 6, id: 'drafter', name: 'Letter Drafter', icon: '📄', desc: 'Regulatory decision letter generation' },
+      { num: 7, id: 'dossier', name: 'Summary & Ledger', icon: '📊', desc: 'Complete case dossier and shared record ledger' }
+    ];
+
+    let currentStep = 1;
+    let isAutoPlaying = false;
+    let autoPlayTimer = null;
+
+    function renderPipelineCards(c) {
+      const act = n => (c.audit_log.find(l => l.agent === n) || {}).action || 'Waiting for review';
+      const conf = [0.95, (c.coverage_findings || {}).confidence || 0.8, (c.necessity_findings || {}).confidence || 0.8, c.confidence || 0.8, 1];
+      const card = (i, stepNum) => `
+        <div class="ag click" id="ag${i}" onclick="setStep(${stepNum})" title="Click to view Agent ${i+1}">
+          <h4><span class="dot"></span>${AGENTS_META[i][0]} <span class="status-pill" id="pill${i}">Pending</span></h4>
+          <small id="s${i}">${act(AGENTS_META[i][1])}</small>
+          <div class="bar"><i id="b${i}" style="width:${(conf[i] * 100).toFixed(0)}%"></i></div>
+        </div>
+      `;
+
+      $('pipe').innerHTML = card(0, 1) +
+        '<div class="line-pipe"></div><div style="font-size:10px; color:var(--cyan); font-weight:700; margin:3px 0;">⚡ PARALLEL FAN-OUT</div>' +
+        '<div style="display:flex; gap:10px; width:100%">' + card(1, 2) + card(2, 3) + '</div>' +
+        '<div style="font-size:10px; color:var(--cyan); font-weight:700; margin:3px 0;">🎯 FAN-IN MERGE</div>' +
+        '<div class="line-pipe"></div>' + card(3, 4) +
+        '<div class="line-pipe"></div>' + card(4, 6);
+    }
+
+    function updatePipelineHighlight(stepIdx) {
+      const setPill = (i, status) => {
+        const el = $('ag' + i);
+        const p = $('pill' + i);
+        if (!el) return;
+        el.classList.remove('run', 'done');
+        if (status === 'run') {
+          el.classList.add('run');
+          if (p) p.textContent = '⚡ Active';
+        } else if (status === 'done') {
+          el.classList.add('done');
+          if (p) p.textContent = '✓ Done';
+        } else {
+          if (p) p.textContent = 'Pending';
+        }
+      };
+
+      for (let i = 0; i < 5; i++) setPill(i, 'pending');
+
+      if (stepIdx === 1) {
+        setPill(0, 'run');
+      } else if (stepIdx === 2) {
+        setPill(0, 'done');
+        setPill(1, 'run');
+      } else if (stepIdx === 3) {
+        setPill(0, 'done');
+        setPill(1, 'done');
+        setPill(2, 'run');
+      } else if (stepIdx === 4) {
+        setPill(0, 'done');
+        setPill(1, 'done');
+        setPill(2, 'done');
+        setPill(3, 'run');
+      } else if (stepIdx === 5) {
+        setPill(0, 'done');
+        setPill(1, 'done');
+        setPill(2, 'done');
+        setPill(3, 'done');
+      } else if (stepIdx === 6) {
+        for (let i = 0; i < 4; i++) setPill(i, 'done');
+        setPill(4, 'run');
+      } else if (stepIdx >= 7) {
+        for (let i = 0; i < 5; i++) setPill(i, 'done');
+      }
+    }
+
+    function renderStepPills() {
+      const row = $('stepPillsRow');
+      if (!row) return;
+      row.innerHTML = STEPS_DATA.map(s => {
+        let cls = 'step-pill-btn';
+        if (s.num < currentStep) cls += ' done';
+        else if (s.num === currentStep) cls += ' active';
+        const badgeContent = s.num < currentStep ? '✓' : s.num;
+        return `
+          <button class="${cls}" onclick="setStep(${s.num})" title="${s.desc}">
+            <span class="step-badge-num">${badgeContent}</span>
+            <span>${s.icon} ${s.name}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
     function showCase(c, animate) {
+      window._activeCase = c;
       go('case');
       window.location.hash = 'case/' + c.case_id;
       $('caseHeaderBadge').className = 'badge ' + c.status;
@@ -1679,123 +2060,625 @@
         <span class="chip" style="cursor:default"><b>${k}:</b> ${esc(v || 'N/A')}</span>
       `).join('');
 
-      const act = n => (c.audit_log.find(l => l.agent === n) || {}).action || 'Waiting for review';
-      const card = i => `
-        <div class="ag" id="ag${i}">
-          <h4><span class="dot"></span>${AGENTS_META[i][0]}</h4>
-          <small id="s${i}">Idle</small>
-          <div class="bar"><i id="b${i}"></i></div>
-        </div>
-      `;
+      renderPipelineCards(c);
 
-      $('pipe').innerHTML = card(0) +
-        '<div class="line-pipe"></div><div style="font-size:11px; color:var(--cyan); font-weight:700; margin:2px 0;">PARALLEL FAN-OUT</div>' +
-        '<div style="display:flex; gap:10px; width:100%">' + card(1) + card(2) + '</div>' +
-        '<div style="font-size:11px; color:var(--cyan); font-weight:700; margin:2px 0;">FAN-IN MERGE</div>' +
-        '<div class="line-pipe"></div>' + card(3) +
-        '<div class="line-pipe"></div>' + card(4);
-
-      $('result').innerHTML = animate ? '<h3>Running multi-agent reasoning...</h3>' : '';
-
-      const conf = [0.95, c.coverage_findings.confidence || 0.8, c.necessity_findings.confidence || 0.8, c.confidence || 0.8, 1];
-      const steps = [[0], [1, 2], [3], [4]];
-      let t = 0;
-
-      steps.forEach(grp => {
-        setTimeout(() => grp.forEach(i => {
-          const el = $('ag' + i);
-          if (el) el.classList.add('run');
-        }), t);
-
-        t += animate ? 800 : 0;
-
-        setTimeout(() => grp.forEach(i => {
-          const a = $('ag' + i);
-          if (!a) return;
-          a.classList.remove('run');
-          const isDone = !(i === 4 && !c.letter);
-          if (isDone) a.classList.add('done');
-          $('s' + i).textContent = isDone ? act(AGENTS_META[i][1]) : 'Awaiting peer-review verdict';
-          $('b' + i).style.width = isDone ? (conf[i] * 100) + '%' : '0%';
-        }), t);
-      });
-
-      setTimeout(() => renderResult(c), t + 50);
+      if (animate) {
+        setStep(1);
+        startAutoPlay();
+      } else {
+        setStep(7);
+      }
     }
 
-    function renderResult(c) {
-      const h = c.human_review;
-      const decColor = c.decision === 'APPROVE' ? 'var(--ok)' : c.decision === 'DENY' ? 'var(--no)' : 'var(--mid)';
+    function setStep(idx) {
+      if (idx < 1) idx = 1;
+      if (idx > 7) idx = 7;
+      currentStep = idx;
 
-      $('result').innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <div>
-            <span style="font-size:12px; color:var(--t); text-transform:uppercase; font-weight:700;">Final Decision</span>
-            <div style="font-size:28px; font-weight:800; font-family:'Plus Jakarta Sans'; color:${decColor};">
-              ${c.decision || c.ai_decision}
+      renderStepPills();
+      updatePipelineHighlight(idx);
+
+      const s = STEPS_DATA[idx - 1];
+      const titleEl = $('activeStepTitle');
+      if (titleEl) titleEl.textContent = `Step ${idx} of 7: ${s.name}`;
+
+      const btnPrev = $('btnPrevStep');
+      const btnNext = $('btnNextStep');
+      if (btnPrev) btnPrev.disabled = (idx === 1);
+      if (btnNext) btnNext.disabled = (idx === 7);
+
+      renderStepContent(idx);
+    }
+
+    function nextStep() {
+      if (currentStep < 7) setStep(currentStep + 1);
+      else stopAutoPlay();
+    }
+
+    function prevStep() {
+      if (currentStep > 1) setStep(currentStep - 1);
+    }
+
+    function resetSteps() {
+      stopAutoPlay();
+      setStep(1);
+    }
+
+    function toggleAutoPlay() {
+      if (isAutoPlaying) stopAutoPlay();
+      else startAutoPlay();
+    }
+
+    function startAutoPlay() {
+      isAutoPlaying = true;
+      const btn = $('btnAutoPlay');
+      if (btn) {
+        btn.innerHTML = '⏸️ Pause';
+        btn.classList.add('active');
+      }
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      autoPlayTimer = setInterval(() => {
+        if (currentStep < 7) {
+          nextStep();
+        } else {
+          stopAutoPlay();
+        }
+      }, 1400);
+    }
+
+    function stopAutoPlay() {
+      isAutoPlaying = false;
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      autoPlayTimer = null;
+      const btn = $('btnAutoPlay');
+      if (btn) {
+        btn.innerHTML = '▶️ Auto-Play';
+        btn.classList.remove('active');
+      }
+    }
+
+    function renderStepContent(idx) {
+      const c = window._activeCase;
+      if (!c) return;
+      const insp = $('stepInspector');
+      if (!insp) return;
+
+      if (idx === 1) {
+        // STEP 1: Request Parser
+        insp.innerHTML = `
+          <div class="agent-deck">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--b); padding-bottom:14px;">
+              <div>
+                <span class="tag">Agent 1 of 5</span>
+                <h2 style="font-size:22px; margin-top:4px;">🔍 Request Parser</h2>
+                <p style="font-size:13px; color:var(--t); margin-top:2px;">
+                  Extracts and normalizes clinical entities from unstructured healthcare submissions.
+                </p>
+              </div>
+              <div style="text-align:right;">
+                <span class="badge COMPLETED">Completed (100%)</span>
+                <div style="font-size:12px; color:var(--cyan); margin-top:4px;">Regex / Semantic NLP Engine</div>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📥 Inputs Received by Agent</div>
+              <div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:8px; font-size:13px; color:#E2E8F0; line-height:1.6;">
+                ${esc(c.raw_request)}
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">⚙️ Respective Work & Internal Logic</div>
+              <ul style="font-size:13px; color:#CBD5E1; line-height:1.7; padding-left:20px; margin:0;">
+                <li><b>Lexical Entity Tokenization:</b> Scanned clinical text for patient demographic markers (e.g. <code>P-1001</code>).</li>
+                <li><b>Procedural & Diagnostic Parsing:</b> Extracted clinical procedure target: <code>${esc(c.parsed.treatment || 'N/A')}</code> and clinical indication: <code>${esc(c.parsed.diagnosis || 'N/A')}</code>.</li>
+                <li><b>Provider & Facility Attribution:</b> Identified referring clinician/specialist: <code>${esc(c.parsed.provider || 'N/A')}</code>.</li>
+                <li><b>Policy Mapping:</b> Mapped member policy to <b>Gold-500 Comprehensive Plan</b>.</li>
+              </ul>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📤 Outputs Generated by Agent</div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
+                <div class="stat-box" style="padding:10px;">
+                  <span class="lbl">Patient ID</span>
+                  <div style="font-size:14px; font-weight:700; color:#fff; margin-top:4px;">${esc(c.parsed.patient || 'P-1001')}</div>
+                </div>
+                <div class="stat-box" style="padding:10px;">
+                  <span class="lbl">Proposed Treatment</span>
+                  <div style="font-size:14px; font-weight:700; color:var(--cyan); margin-top:4px;">${esc(c.parsed.treatment || 'N/A')}</div>
+                </div>
+                <div class="stat-box" style="padding:10px;">
+                  <span class="lbl">Clinical Diagnosis</span>
+                  <div style="font-size:14px; font-weight:700; color:#CBD5E1; margin-top:4px;">${esc(c.parsed.diagnosis || 'N/A')}</div>
+                </div>
+                <div class="stat-box" style="padding:10px;">
+                  <span class="lbl">Prescribing Provider</span>
+                  <div style="font-size:14px; font-weight:700; color:#CBD5E1; margin-top:4px;">${esc(c.parsed.provider || 'N/A')}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📝 Shared Case Record State Delta (Committed Write)</div>
+              <div class="provenance-entry">
+                <b>written_by:</b> "Request Parser"<br>
+                <b>field:</b> "parsed"<br>
+                <b>value:</b> ${esc(JSON.stringify(c.parsed))}<br>
+                <b>timestamp:</b> ${(c.audit_log.find(l => l.agent === 'Request Parser') || {}).timestamp || c.created}
+              </div>
             </div>
           </div>
-          <div style="text-align:right">
-            <span style="font-size:12px; color:var(--t); text-transform:uppercase; font-weight:700;">AI Decision</span>
-            <div>${badge(c.ai_decision)}</div>
-            <small style="color:var(--t)">Confidence: ${Math.round(c.confidence * 100)}%</small>
-          </div>
-        </div>
-
-        ${c.status === 'PENDING_HUMAN_REVIEW' ? `
-          <div class="warn-banner">
-            <b>Peer Review Required:</b> This case is held in the Review Queue. The decision letter will be finalized once a reviewer confirms or overturns the finding.
-          </div>
-        ` : ''}
-
-        ${h.verdict ? `
-          <div class="warn-banner" style="color:var(--cyan); border-color:rgba(34,211,238,0.4); background:rgba(34,211,238,0.08);">
-            <b>Peer Review Completed:</b> ${h.verdict} by ${esc(h.reviewer)}. ${esc(h.notes || '')}
-          </div>
-        ` : ''}
-
-        <h4 style="margin: 16px 0 6px;">Grounding: Cited Clauses</h4>
-        <div>
-          ${c.cited_clauses.map(id => `
-            <span class="chip mono" onclick="this.classList.toggle('open'); this.nextElementSibling.style.display = this.classList.contains('open') ? 'block' : 'none';">
-              🔍 ${id}
-            </span>
-            <div class="ctext">
-              <b>${id}:</b> ${esc(c.clause_text[id] || 'Policy text retrieved via RAG.')}
+        `;
+      } else if (idx === 2) {
+        // STEP 2: Coverage Retrieval
+        const cov = c.coverage_findings || {};
+        const clauses = cov.clauses || [];
+        insp.innerHTML = `
+          <div class="agent-deck">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--b); padding-bottom:14px;">
+              <div>
+                <span class="tag">Agent 2 of 5 &bull; Parallel Fan-Out</span>
+                <h2 style="font-size:22px; margin-top:4px;">📋 Coverage Retrieval Agent</h2>
+                <p style="font-size:13px; color:var(--t); margin-top:2px;">
+                  Vector RAG retrieval over Gold-500 plan documents (~15 clauses) to determine coverage & exclusions.
+                </p>
+              </div>
+              <div style="text-align:right;">
+                ${badge(cov.status || 'RUNNING')}
+                <div style="font-size:12px; color:var(--cyan); margin-top:4px;">ChromaDB Vector Store (128-dim)</div>
+              </div>
             </div>
-          `).join('')}
-        </div>
 
-        <h4 style="margin: 18px 0 6px;">Decision Notice Letter</h4>
-        ${c.letter ? `
-          <textarea class="letter-box" id="lt">${esc(c.letter)}</textarea>
-          <div style="margin-top:8px; display:flex; gap:10px;">
-            <button class="btn sm" onclick="navigator.clipboard.writeText($('lt').value); toast('Letter copied to clipboard');">Copy Letter</button>
-            <button class="btn ghost sm" onclick="downloadLetter('${c.case_id}')">Download .txt</button>
-          </div>
-        ` : `
-          <p style="font-size:13px; color:var(--t); background:rgba(255,255,255,0.02); padding:12px; border-radius:8px;">
-            The decision notice letter is drafted after clinical peer review is complete.
-          </p>
-        `}
-
-        <h4 style="margin: 20px 0 6px;">Audit Trail Timeline</h4>
-        <div style="max-height: 220px; overflow-y: auto; padding-right: 6px;">
-          ${c.audit_log.map(l => `
-            <div style="border-left: 2px solid var(--cyan); padding: 2px 0 2px 10px; margin: 8px 0; font-size: 13px;">
-              <b style="color:#fff">${l.agent}</b>
-              <span class="mono" style="font-size:11px; color:var(--cyan); margin-left:6px;">${l.timestamp.slice(11)}</span>
-              <div style="color:#94A3B8; margin-top:2px;">${esc(l.action)}</div>
+            <div class="agent-box">
+              <div class="agent-box-title">📥 Inputs Received by Agent</div>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; font-size:13px;">
+                <span class="chip" style="cursor:default"><b>Policy ID:</b> GOLD-500</span>
+                <span class="chip" style="cursor:default"><b>Procedure:</b> ${esc(c.parsed.treatment || 'N/A')}</span>
+                <span class="chip" style="cursor:default"><b>RAG Target:</b> data/plan_documents/gold_500_plan.md</span>
+              </div>
             </div>
-          `).join('')}
-        </div>
 
-        <details class="raw-json">
-          <summary>View Full Shared Case Record (JSON)</summary>
-          <pre class="mono">${esc(JSON.stringify(c, null, 2))}</pre>
-        </details>
-      `;
-      window._activeCase = c;
+            <div class="agent-box">
+              <div class="agent-box-title">⚙️ Respective Work & Internal Logic</div>
+              <ul style="font-size:13px; color:#CBD5E1; line-height:1.7; padding-left:20px; margin:0;">
+                <li><b>ChromaDB Semantic Search:</b> Executed cosine similarity query matching <code>${esc(c.parsed.treatment)}</code> against 15 benefit clauses.</li>
+                <li><b>Exclusion Verification:</b> Screened Section 4 policy exclusions (Cosmetic <code>PLAN-4.1</code>, Experimental <code>PLAN-4.2</code>, Out-of-Network <code>PLAN-4.3</code>, Dental <code>PLAN-4.4</code>).</li>
+                <li><b>Prior Authorisation Mandate:</b> Verified Section 7.1 (<code>PLAN-7.1</code>) requirements for elective surgeries, oncology, and advanced imaging.</li>
+                <li><b>Finding:</b> Status concluded as <b>${cov.status}</b> with ${(cov.confidence * 100).toFixed(0)}% confidence.</li>
+              </ul>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📤 Outputs Generated by Agent</div>
+              <div style="margin-bottom:10px;">
+                <b>Coverage Rationale:</b>
+                <p style="font-size:13px; color:#E2E8F0; margin-top:4px; line-height:1.5;">${esc(cov.reason || 'Evaluated against policy clauses.')}</p>
+              </div>
+              <div style="font-size:12px; color:var(--t); font-weight:700; margin-bottom:6px;">RETRIEVED BENEFIT CLAUSES:</div>
+              <div>
+                ${clauses.map(id => `
+                  <div style="margin-bottom:8px; background:rgba(0,0,0,0.3); border-left:3px solid var(--cyan); padding:8px 12px; border-radius:0 8px 8px 0;">
+                    <span class="mono" style="color:var(--cyan); font-weight:700;">🔍 ${id}</span>
+                    <div style="font-size:12px; color:#CBD5E1; margin-top:2px;">${esc(c.clause_text[id] || 'Policy clause retrieved via ChromaDB RAG.')}</div>
+                  </div>
+                `).join('') || '<span style="color:var(--t)">No clauses cited</span>'}
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📝 Shared Case Record State Delta (Committed Write)</div>
+              <div class="provenance-entry">
+                <b>written_by:</b> "Coverage Retrieval"<br>
+                <b>field:</b> "coverage_findings"<br>
+                <b>status:</b> "${cov.status}" &bull; <b>confidence:</b> ${cov.confidence}<br>
+                <b>clauses:</b> [${clauses.map(x => '"' + x + '"').join(', ')}]
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (idx === 3) {
+        // STEP 3: Medical Necessity
+        const nec = c.necessity_findings || {};
+        const clauses = nec.clauses || [];
+        insp.innerHTML = `
+          <div class="agent-deck">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--b); padding-bottom:14px;">
+              <div>
+                <span class="tag">Agent 3 of 5 &bull; Parallel Fan-Out</span>
+                <h2 style="font-size:22px; margin-top:4px;">🩺 Medical Necessity Agent</h2>
+                <p style="font-size:13px; color:var(--t); margin-top:2px;">
+                  Vector RAG retrieval over clinical guidelines (~10 guidelines) to verify evidence-based clinical criteria.
+                </p>
+              </div>
+              <div style="text-align:right;">
+                ${badge(nec.status || 'RUNNING')}
+                <div style="font-size:12px; color:var(--cyan); margin-top:4px;">ChromaDB Clinical Store (128-dim)</div>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📥 Inputs Received by Agent</div>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; font-size:13px;">
+                <span class="chip" style="cursor:default"><b>Diagnosis:</b> ${esc(c.parsed.diagnosis || 'N/A')}</span>
+                <span class="chip" style="cursor:default"><b>Treatment:</b> ${esc(c.parsed.treatment || 'N/A')}</span>
+                <span class="chip" style="cursor:default"><b>Guideline Store:</b> data/guidelines/clinical_guidelines.md</span>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">⚙️ Respective Work & Internal Logic</div>
+              <ul style="font-size:13px; color:#CBD5E1; line-height:1.7; padding-left:20px; margin:0;">
+                <li><b>Clinical Guideline Alignment:</b> Queried vector index for clinical criteria matching diagnosis <code>${esc(c.parsed.diagnosis)}</code>.</li>
+                <li><b>Conservative Therapy Duration:</b> Evaluated whether documentation verifies the mandatory conservative treatment trial (&ge; 6 weeks).</li>
+                <li><b>Objective Clinical Indicators:</b> Checked radiological / clinical findings against guideline prerequisites.</li>
+                <li><b>Emergency / Red Flag Bypass:</b> Confirmed presence or absence of acute red-flag exemptions.</li>
+              </ul>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📤 Outputs Generated by Agent</div>
+              <div style="margin-bottom:10px;">
+                <b>Clinical Rationale:</b>
+                <p style="font-size:13px; color:#E2E8F0; margin-top:4px; line-height:1.5;">${esc(nec.reason || 'Evaluated against evidence guidelines.')}</p>
+              </div>
+              <div class="criteria-checklist">
+                <div class="criteria-item ${nec.status === 'MET' ? 'met' : (nec.status === 'INSUFFICIENT' ? 'unclear' : 'not-met')}">
+                  <span>${nec.status === 'MET' ? '✅' : (nec.status === 'INSUFFICIENT' ? '⚠️' : '❌')}</span>
+                  <span><b>Conservative Therapy Requirement:</b> ${nec.status === 'MET' ? 'Verified (&ge; 6 weeks documented)' : (nec.status === 'INSUFFICIENT' ? 'Incomplete clinical documentation' : 'Unmet (&lt; 6 weeks or missing)')}</span>
+                </div>
+                <div class="criteria-item ${nec.status === 'MET' ? 'met' : (nec.status === 'INSUFFICIENT' ? 'unclear' : 'not-met')}">
+                  <span>${nec.status === 'MET' ? '✅' : (nec.status === 'INSUFFICIENT' ? '⚠️' : '❌')}</span>
+                  <span><b>Clinical Guideline Grounding:</b> ${clauses.length ? clauses.join(', ') : 'None'}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📝 Shared Case Record State Delta (Committed Write)</div>
+              <div class="provenance-entry">
+                <b>written_by:</b> "Medical Necessity"<br>
+                <b>field:</b> "necessity_findings"<br>
+                <b>status:</b> "${nec.status}" &bull; <b>confidence:</b> ${nec.confidence}<br>
+                <b>guidelines:</b> [${clauses.map(x => '"' + x + '"').join(', ')}]
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (idx === 4) {
+        // STEP 4: Authorisation Manager
+        const decColor = c.ai_decision === 'APPROVE' ? 'var(--ok)' : (c.ai_decision === 'DENY' ? 'var(--no)' : 'var(--mid)');
+        insp.innerHTML = `
+          <div class="agent-deck">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--b); padding-bottom:14px;">
+              <div>
+                <span class="tag">Agent 4 of 5 &bull; Fan-In Merge</span>
+                <h2 style="font-size:22px; margin-top:4px;">🎯 Authorisation Manager</h2>
+                <p style="font-size:13px; color:var(--t); margin-top:2px;">
+                  Merges parallel coverage and medical necessity findings into an authoritative determination.
+                </p>
+              </div>
+              <div style="text-align:right;">
+                ${badge(c.ai_decision)}
+                <div style="font-size:12px; color:var(--cyan); margin-top:4px;">Confidence: ${(c.confidence * 100).toFixed(0)}%</div>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📥 Inputs Received by Agent (Fan-In Aggregation)</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px;">
+                  <span style="font-size:11px; color:var(--cyan); font-weight:700;">FROM COVERAGE RETRIEVAL:</span>
+                  <div style="font-size:13px; margin-top:4px;"><b>Status:</b> ${c.coverage_findings.status}</div>
+                  <div style="font-size:12px; color:#94A3B8;">Clauses: ${(c.coverage_findings.clauses || []).join(', ')}</div>
+                </div>
+                <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px;">
+                  <span style="font-size:11px; color:var(--cyan); font-weight:700;">FROM MEDICAL NECESSITY:</span>
+                  <div style="font-size:13px; margin-top:4px;"><b>Status:</b> ${c.necessity_findings.status}</div>
+                  <div style="font-size:12px; color:#94A3B8;">Guidelines: ${(c.necessity_findings.clauses || []).join(', ')}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">⚙️ Respective Work & Policy Arbitration Matrix</div>
+              <ul style="font-size:13px; color:#CBD5E1; line-height:1.7; padding-left:20px; margin:0;">
+                <li><b>Policy Arbitration:</b> If Coverage is <code>EXCLUDED</code> &rarr; <code>DENY</code>; If Clinical criteria <code>NOT_MET</code> &rarr; <code>DENY</code>; If Documentation <code>INSUFFICIENT</code> &rarr; <code>MORE_INFO</code> (cite <code>PLAN-7.2</code>); If both criteria satisfied &rarr; <code>APPROVE</code>.</li>
+                <li><b>Decision Synthesis:</b> Triaged case as <b style="color:${decColor}">${c.ai_decision}</b> with ${(c.confidence * 100).toFixed(0)}% confidence score.</li>
+                <li><b>Mandatory Routing Gate:</b> ${c.ai_decision === 'APPROVE' ? 'Clean approval detected &rarr; auto-proceeds to Letter Drafter.' : 'Adverse determination detected (' + c.ai_decision + ') &rarr; triggers mandatory clinical peer review escalation under Policy PLAN-7.3.'}</li>
+              </ul>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📤 Outputs Generated by Agent</div>
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div>
+                  <div style="font-size:12px; color:var(--t); text-transform:uppercase; font-weight:700;">Preliminary AI Decision</div>
+                  <div style="font-size:26px; font-weight:800; color:${decColor};">${c.ai_decision}</div>
+                </div>
+                <div>
+                  <div style="font-size:12px; color:var(--t); text-transform:uppercase; font-weight:700;">Workflow State</div>
+                  <div>${badge(c.status)}</div>
+                </div>
+              </div>
+              <div style="margin-top:12px;">
+                <span style="font-size:12px; color:var(--t); font-weight:700;">CONSOLIDATED CITED CLAUSES:</span>
+                <div style="margin-top:4px;">
+                  ${c.cited_clauses.map(id => `<span class="chip mono">🔍 ${id}</span>`).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📝 Shared Case Record State Delta (Committed Writes)</div>
+              <div class="provenance-entry">
+                <b>written_by:</b> "Authorisation Manager"<br>
+                <b>ai_decision:</b> "${c.ai_decision}" &bull; <b>decision:</b> "${c.decision}"<br>
+                <b>status:</b> "${c.status}" &bull; <b>confidence:</b> ${c.confidence}<br>
+                <b>cited_clauses:</b> [${c.cited_clauses.map(x => '"' + x + '"').join(', ')}]
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (idx === 5) {
+        // STEP 5: Clinical Peer Review
+        const h = c.human_review || {};
+        insp.innerHTML = `
+          <div class="agent-deck">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--b); padding-bottom:14px;">
+              <div>
+                <span class="tag">Human-in-the-Loop &bull; Group-of-3 Add-on</span>
+                <h2 style="font-size:22px; margin-top:4px;">👨‍⚕️ Clinical Peer Review Escalation</h2>
+                <p style="font-size:13px; color:var(--t); margin-top:2px;">
+                  Mandatory peer review by a licensed physician before finalizing adverse pre-authorisation decisions.
+                </p>
+              </div>
+              <div style="text-align:right;">
+                ${h.verdict ? '<span class="badge COMPLETED">Reviewed: ' + h.verdict + '</span>' : (c.decision === 'APPROVE' ? '<span class="badge COMPLETED">Auto-Bypassed</span>' : '<span class="badge PENDING_HUMAN_REVIEW">Action Required</span>')}
+                <div style="font-size:12px; color:var(--cyan); margin-top:4px;">Policy PLAN-7.3 Compliant</div>
+              </div>
+            </div>
+
+            ${c.decision === 'APPROVE' && !h.verdict ? `
+              <div class="agent-box" style="border-color:rgba(52,211,153,0.3); background:rgba(52,211,153,0.04);">
+                <div style="font-size:16px; font-weight:700; color:var(--ok); margin-bottom:6px;">✅ Clean Approval &mdash; Peer Review Not Required</div>
+                <p style="font-size:13px; color:#CBD5E1; line-height:1.6; margin:0;">
+                  Under Section 7.3 of the Gold-500 Benefit Agreement (<code>PLAN-7.3</code>), clinical peer review is mandated exclusively for adverse determinations (denials and incomplete clinical submissions). Because this request satisfies all benefit coverage and medical necessity requirements, it was auto-approved and routed directly to the Letter Drafter.
+                </p>
+              </div>
+            ` : `
+              <div class="agent-box" style="border-color:rgba(251,191,36,0.3); background:rgba(251,191,36,0.04);">
+                <div style="font-size:15px; font-weight:700; color:var(--mid); margin-bottom:6px;">⚠️ Mandatory Adverse Determination Review Gate</div>
+                <p style="font-size:13px; color:#E2E8F0; line-height:1.6; margin-bottom:12px;">
+                  The AI Authorisation Manager proposed <b>${c.ai_decision}</b> citing clauses <b>${c.cited_clauses.join(', ')}</b>. 
+                  As a reviewing clinician, select an action below to uphold, overturn, or request additional clinical records.
+                </p>
+
+                ${h.verdict ? `
+                  <div style="background:rgba(34,211,238,0.08); border:1px solid rgba(34,211,238,0.35); border-radius:10px; padding:12px; margin-bottom:12px;">
+                    <b style="color:var(--cyan);">Peer Review Completed:</b> ${h.verdict} by ${esc(h.reviewer || 'Licensed Physician')}.<br>
+                    <span style="font-size:13px; color:#CBD5E1;">Notes: ${esc(h.notes || 'No reviewer notes specified.')}</span>
+                  </div>
+                ` : ''}
+
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                  <label style="font-size:12px; font-weight:700; color:#fff;">Reviewing Clinician Rationale Notes:</label>
+                  <input id="stepReviewNotes" placeholder="e.g. Reviewed clinical documentation. Confirmed lack of 6-week conservative trial..." value="${esc(h.notes || '')}">
+                  <div style="display:flex; gap:10px; margin-top:6px; flex-wrap:wrap;">
+                    <button class="btn sm" onclick="submitInStepReview('${c.case_id}', 'UPHOLD')">🛡️ Uphold Adverse Finding (${c.ai_decision})</button>
+                    <button class="btn ghost sm" onclick="submitInStepReview('${c.case_id}', 'OVERTURN')">⚡ Overturn Finding (Grant Approval)</button>
+                    <button class="btn ghost sm" onclick="submitInStepReview('${c.case_id}', 'REQUEST_INFO')">📋 Request Additional Clinical Information</button>
+                  </div>
+                </div>
+              </div>
+            `}
+
+            <div class="agent-box">
+              <div class="agent-box-title">📝 Shared Case Record State Delta (Committed Write)</div>
+              <div class="provenance-entry">
+                <b>written_by:</b> "Clinical Peer Reviewer"<br>
+                <b>human_review:</b> ${esc(JSON.stringify(c.human_review))}<br>
+                <b>final_decision:</b> "${c.decision}" &bull; <b>status:</b> "${c.status}"
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (idx === 6) {
+        // STEP 6: Letter Drafter
+        insp.innerHTML = `
+          <div class="agent-deck">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--b); padding-bottom:14px;">
+              <div>
+                <span class="tag">Agent 5 of 5</span>
+                <h2 style="font-size:22px; margin-top:4px;">📄 Letter Drafter Agent</h2>
+                <p style="font-size:13px; color:var(--t); margin-top:2px;">
+                  Generates formal regulatory response letter grounded in governing clauses and appeal disclosures.
+                </p>
+              </div>
+              <div style="text-align:right;">
+                <span class="badge COMPLETED">Drafted</span>
+                <div style="font-size:12px; color:var(--cyan); margin-top:4px;">${c.letter ? c.letter.split(/\s+/).length : 0} words</div>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📥 Inputs Received by Agent</div>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; font-size:13px;">
+                <span class="chip" style="cursor:default"><b>Final Decision:</b> ${c.decision}</span>
+                <span class="chip" style="cursor:default"><b>Patient:</b> ${esc(c.parsed.patient || 'P-1001')}</span>
+                <span class="chip" style="cursor:default"><b>Provider:</b> ${esc(c.parsed.provider || 'N/A')}</span>
+                <span class="chip" style="cursor:default"><b>Cited Clauses:</b> ${c.cited_clauses.join(', ')}</span>
+              </div>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">⚙️ Respective Work & Regulatory Compliance</div>
+              <ul style="font-size:13px; color:#CBD5E1; line-height:1.7; padding-left:20px; margin:0;">
+                <li><b>Statutory Notice Formatting:</b> Drafted personalized determination notice addressed to provider and member.</li>
+                <li><b>Explicit Regulatory Grounding:</b> Embedded exact policy clause IDs (<code>${c.cited_clauses.join(', ')}</code>) and clinical rationale.</li>
+                <li><b>Appeals & Escalation Disclosure:</b> Articulated the member's right to an administrative appeal within 60 calendar days (under <code>PLAN-7.3</code>) with contact details for peer-to-peer physician consultation.</li>
+              </ul>
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📤 Outputs Generated: Formal Determination Notice</div>
+              ${c.letter ? `
+                <textarea class="letter-box" id="lt">${esc(c.letter)}</textarea>
+                <div style="margin-top:10px; display:flex; gap:10px;">
+                  <button class="btn sm" onclick="navigator.clipboard.writeText($('lt').value); toast('Letter copied to clipboard');">📋 Copy Letter</button>
+                  <button class="btn ghost sm" onclick="downloadLetter('${c.case_id}')">💾 Download .txt</button>
+                </div>
+              ` : `
+                <div class="warn-banner">
+                  The determination letter will be drafted automatically once clinical peer review is concluded.
+                </div>
+              `}
+            </div>
+
+            <div class="agent-box">
+              <div class="agent-box-title">📝 Shared Case Record State Delta (Committed Write)</div>
+              <div class="provenance-entry">
+                <b>written_by:</b> "Letter Drafter"<br>
+                <b>field:</b> "letter"<br>
+                <b>length:</b> ${c.letter ? c.letter.length : 0} characters<br>
+                <b>timestamp:</b> ${(c.audit_log.find(l => l.agent === 'Letter Drafter') || {}).timestamp || c.created}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (idx === 7) {
+        // STEP 7: Full Dossier & Shared Case Record Ledger
+        const decColor = c.decision === 'APPROVE' ? 'var(--ok)' : (c.decision === 'DENY' ? 'var(--no)' : 'var(--mid)');
+        const h = c.human_review || {};
+        const writes = c.history || [];
+
+        insp.innerHTML = `
+          <div class="agent-deck">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom:1px solid var(--b); padding-bottom:14px;">
+              <div>
+                <span class="tag">Executive Dossier</span>
+                <h2 style="font-size:24px; margin-top:4px;">📊 Final Case Determination Dossier</h2>
+                <div style="font-size:13px; color:var(--t); margin-top:2px;">Case #${c.case_id} &bull; Logged ${c.created}</div>
+              </div>
+              <div style="text-align:right;">
+                <span style="font-size:11px; color:var(--t); text-transform:uppercase; font-weight:700;">Final Authoritative Verdict</span>
+                <div style="font-size:28px; font-weight:800; font-family:'Plus Jakarta Sans'; color:${decColor};">
+                  ${c.decision || c.ai_decision}
+                </div>
+                <small style="color:var(--t)">AI Confidence: ${Math.round(c.confidence * 100)}%</small>
+              </div>
+            </div>
+
+            ${c.status === 'PENDING_HUMAN_REVIEW' ? `
+              <div class="warn-banner">
+                <b>Pending Peer Review:</b> This case is held in the Review Queue. Reviewers can uphold or overturn the finding from Step 5 or the Peer Review tab.
+              </div>
+            ` : ''}
+
+            ${h.verdict ? `
+              <div class="warn-banner" style="color:var(--cyan); border-color:rgba(34,211,238,0.4); background:rgba(34,211,238,0.08);">
+                <b>Peer Review Completed:</b> ${h.verdict} by ${esc(h.reviewer)}. ${esc(h.notes || '')}
+              </div>
+            ` : ''}
+
+            <!-- Grounding: Cited Clauses -->
+            <div class="agent-box">
+              <div class="agent-box-title">📜 Grounding: Cited Policy & Clinical Clauses</div>
+              <div>
+                ${c.cited_clauses.map(id => `
+                  <div style="margin-bottom:8px;">
+                    <span class="chip mono" onclick="this.classList.toggle('open'); this.nextElementSibling.style.display = this.classList.contains('open') ? 'block' : 'none';">
+                      🔍 ${id} <small style="opacity:0.7;">(click to toggle clause text)</small>
+                    </span>
+                    <div class="ctext">
+                      <b>${id}:</b> ${esc(c.clause_text[id] || 'Policy text retrieved via ChromaDB RAG.')}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Determination Notice Letter -->
+            <div class="agent-box">
+              <div class="agent-box-title">✉️ Final Determination Notice Letter</div>
+              ${c.letter ? `
+                <textarea class="letter-box" id="lt" rows="8">${esc(c.letter)}</textarea>
+                <div style="margin-top:10px; display:flex; gap:10px;">
+                  <button class="btn sm" onclick="navigator.clipboard.writeText($('lt').value); toast('Letter copied to clipboard');">📋 Copy Letter</button>
+                  <button class="btn ghost sm" onclick="downloadLetter('${c.case_id}')">💾 Download .txt</button>
+                </div>
+              ` : `
+                <p style="font-size:13px; color:var(--t); background:rgba(255,255,255,0.02); padding:12px; border-radius:8px;">
+                  The decision notice letter is drafted after clinical peer review is complete.
+                </p>
+              `}
+            </div>
+
+            <!-- Chronological Shared Case Record Ledger -->
+            <div class="agent-box">
+              <div class="agent-box-title">📝 Chronological Shared Case Record Ledger ({field, value, written_by, timestamp})</div>
+              <p style="font-size:12px; color:var(--t); margin-bottom:8px;">
+                Every agent reads from and writes to this unified case record. Each write records the agent identity, field modified, and timestamp.
+              </p>
+              <div style="max-height:280px; overflow-y:auto;">
+                <table class="ledger-table">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Agent (written_by)</th>
+                      <th>Field Modified</th>
+                      <th>Value Committed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${writes.length ? writes.map(w => `
+                      <tr>
+                        <td class="mono" style="color:var(--cyan); white-space:nowrap;">${w.timestamp ? w.timestamp.slice(11) : '-'}</td>
+                        <td style="font-weight:700; color:#fff; white-space:nowrap;">${esc(w.written_by)}</td>
+                        <td><code style="color:#C4B5FD">${esc(w.field)}</code></td>
+                        <td style="font-family:'JetBrains Mono', monospace; font-size:11px; color:#CBD5E1; max-width:320px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${esc(typeof w.value === 'object' ? JSON.stringify(w.value) : String(w.value))}">
+                          ${esc(typeof w.value === 'object' ? JSON.stringify(w.value) : String(w.value))}
+                        </td>
+                      </tr>
+                    `).join('') : c.audit_log.map(l => `
+                      <tr>
+                        <td class="mono" style="color:var(--cyan); white-space:nowrap;">${l.timestamp ? l.timestamp.slice(11) : '-'}</td>
+                        <td style="font-weight:700; color:#fff;">${esc(l.agent)}</td>
+                        <td><code>action</code></td>
+                        <td style="color:#CBD5E1;">${esc(l.action)}</td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <details class="raw-json" style="margin-top:10px;">
+              <summary>View Complete Shared Case Record (Raw JSON)</summary>
+              <pre class="mono">${esc(JSON.stringify(c, null, 2))}</pre>
+            </details>
+          </div>
+        `;
+      }
+    }
+
+    async function submitInStepReview(id, verdict) {
+      const notes = ($('stepReviewNotes') || {}).value || '';
+      try {
+        toast(`Recording peer review: ${verdict}...`);
+        const updated = await post(`/cases/${id}/review`, {
+          verdict: verdict,
+          reviewer: 'Clinical Peer Reviewer',
+          notes: notes
+        });
+        window._activeCase = updated;
+        toast(`Review recorded: ${verdict}. Final letter generated!`);
+        renderPipelineCards(updated);
+        setStep(6);
+      } catch (e) {
+        toast('Error recording review: ' + e.message);
+      }
     }
 
     function downloadLetter(cid) {

@@ -90,3 +90,4 @@ async def with_fallback(
             return res
     else:
         return rule_func(case_record)
+
