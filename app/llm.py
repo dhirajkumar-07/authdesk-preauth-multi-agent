@@ -10,7 +10,7 @@ def provider():
     if os.getenv("FORCE_RULES") == "1":
         return None
     key = os.getenv("GEMINI_API_KEY", "")
-    if key and key.startswith("AIzaSy"):
+    if key and (key.startswith("AIzaSy") or len(key) > 20):
         return "gemini"
     if os.getenv("OPENAI_API_KEY"):
         return "openai"
@@ -19,8 +19,15 @@ def provider():
 def available():
     return provider() is not None
 
-def mode(): return {"mode": "LLM (Semantic Kernel)" if available() else "RULES (Deterministic ChromaDB)", "provider": provider(), "model": MODEL()}
-def MODEL(): return os.getenv("LLM_MODEL") or ("gemini-2.0-flash" if provider() == "gemini" else "gpt-4o-mini")
+def mode():
+    m = MODEL()
+    if available():
+        return {"mode": "Google Gemini (Semantic Kernel)", "provider": "gemini", "model": m}
+    else:
+        return {"mode": "Deterministic ChromaDB (Offline Grounding)", "provider": "gemini", "model": m}
+
+def MODEL(): 
+    return os.getenv("LLM_MODEL") or "gemini-2.0-flash"
 
 _svc = _cfg = None
 def _service():

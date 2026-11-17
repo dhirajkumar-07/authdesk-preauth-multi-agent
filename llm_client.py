@@ -11,7 +11,7 @@ def provider() -> str:
     if os.getenv("FORCE_RULES") == "1":
         return None
     key = os.getenv("GEMINI_API_KEY", "")
-    if key and key.startswith("AIzaSy"):
+    if key and (key.startswith("AIzaSy") or len(key) > 20):
         return "gemini"
     if os.getenv("OPENAI_API_KEY"):
         return "openai"
@@ -21,12 +21,7 @@ def is_llm_available() -> bool:
     return provider() is not None
 
 def get_model_name() -> str:
-    p = provider()
-    if p == "gemini":
-        return os.getenv("LLM_MODEL", "gemini-2.0-flash")
-    if p == "openai":
-        return os.getenv("LLM_MODEL", "gpt-4o-mini")
-    return "Rule-Based Engine (Offline)"
+    return os.getenv("LLM_MODEL") or "gemini-2.0-flash"
 
 _sk_kernel = None
 _sk_chat = None

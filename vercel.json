@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "env": {
+    "LLM_MODEL": "gemini-2.0-flash"
+  },
   "functions": {
     "api/index.py": {
       "includeFiles": "app/**,data/**,static/**",
