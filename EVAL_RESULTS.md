@@ -1,6 +1,6 @@
 # AuthDesk: Evaluation Hardening & Benchmark Results (16 Cases)
 
-**Project**: Q24, Group 24 — Treatment Pre-Authorisation Decision Desk  
+**Project**: AuthDesk System — Treatment Pre-Authorisation Decision Desk  
 **Evaluation Mode**: Google Gemini via Semantic Kernel (`gemini-3.1-flash-lite`) vs Rule Engine (`FORCE_RULES=1`)  
 **Corpus Size**: 16 Test Cases (Original 10 Coursework Cases + 6 Hardened Cases)  
 **Constraint Enforced**: Agents' rules and prompts were NOT modified to force tests to pass.

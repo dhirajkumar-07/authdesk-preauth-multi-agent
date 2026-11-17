@@ -1930,11 +1930,49 @@
     async function submitCase() {
       const r = $('req').value.trim();
       if (!r) return toast('Please enter clinical request text.');
-      toast('Agents engaged. Running decision pipeline...');
+      
+      // Immediately transition to Case view and highlight active agents starting
+      go('case');
+      $('caseHeaderBadge').className = 'badge RUNNING';
+      $('caseHeaderBadge').textContent = 'Case Running...';
+      $('raw').textContent = r;
+      const titleEl = $('activeStepTitle');
+      if (titleEl) titleEl.textContent = 'Engaging Multi-Agent Pipeline...';
+      
+      $('pipe').innerHTML = `
+        <div class="ag run" id="ag0">
+          <h4><span class="dot"></span>Request Parser <span class="status-pill">⚡ Active</span></h4>
+          <small>Extracting clinical entities...</small>
+          <div class="bar"><i style="width:40%"></i></div>
+        </div>
+        <div class="line-pipe"></div><div style="font-size:10px; color:var(--cyan); font-weight:700; margin:3px 0;">⚡ PARALLEL FAN-OUT</div>
+        <div style="display:flex; gap:10px; width:100%">
+          <div class="ag" id="ag1"><h4><span class="dot"></span>Coverage Retrieval <span class="status-pill">Pending</span></h4><small>Awaiting parser</small><div class="bar"><i></i></div></div>
+          <div class="ag" id="ag2"><h4><span class="dot"></span>Medical Necessity <span class="status-pill">Pending</span></h4><small>Awaiting parser</small><div class="bar"><i></i></div></div>
+        </div>
+        <div style="font-size:10px; color:var(--cyan); font-weight:700; margin:3px 0;">🎯 FAN-IN MERGE</div>
+        <div class="line-pipe"></div>
+        <div class="ag" id="ag3"><h4><span class="dot"></span>Authorisation Manager <span class="status-pill">Pending</span></h4><small>Awaiting RAG findings</small><div class="bar"><i></i></div></div>
+        <div class="line-pipe"></div>
+        <div class="ag" id="ag4"><h4><span class="dot"></span>Letter Drafter <span class="status-pill">Pending</span></h4><small>Awaiting decision</small><div class="bar"><i></i></div></div>
+      `;
+
+      $('stepInspector').innerHTML = `
+        <div style="text-align:center; padding:50px 20px;">
+          <div style="display:inline-block; width:44px; height:44px; border:3px solid rgba(34,211,238,0.2); border-top-color:var(--cyan); border-radius:50%; animation:spinRing 0.8s linear infinite;"></div>
+          <h3 style="margin-top:16px;">Engaging Multi-Agent Coordination Pipeline...</h3>
+          <p style="color:var(--t); font-size:13px; margin-top:4px;">Request Parser &bull; Parallel ChromaDB Vector RAG &bull; Policy Synthesis &bull; Regulatory Drafter</p>
+        </div>
+      `;
+
+      toast('Agents engaged. Running multi-agent decision desk...');
       try {
         const c = await post('/cases', { request: r });
         showCase(c, true);
-      } catch (e) {}
+      } catch (e) {
+        toast('Error running case: ' + e.message);
+        $('stepInspector').innerHTML = `<div class="warn-banner">Error running case: ${esc(e.message)}</div>`;
+      }
     }
 
     async function openCase(id) {

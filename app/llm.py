@@ -7,10 +7,20 @@ except ImportError: pass
 from .case_record import log
 
 def provider():
-    return "gemini" if os.getenv("GEMINI_API_KEY") else "openai" if os.getenv("OPENAI_API_KEY") else None
-def available(): return provider() is not None and os.getenv("FORCE_RULES") != "1"
-def mode(): return {"mode": "LLM (Semantic Kernel)" if available() else "RULES (no API key)", "provider": provider(), "model": MODEL()}
-def MODEL(): return os.getenv("LLM_MODEL") or ("gemini-3.5-flash-lite" if provider() == "gemini" else "gpt-4o-mini")
+    if os.getenv("FORCE_RULES") == "1":
+        return None
+    key = os.getenv("GEMINI_API_KEY", "")
+    if key and key.startswith("AIzaSy"):
+        return "gemini"
+    if os.getenv("OPENAI_API_KEY"):
+        return "openai"
+    return None
+
+def available():
+    return provider() is not None
+
+def mode(): return {"mode": "LLM (Semantic Kernel)" if available() else "RULES (Deterministic ChromaDB)", "provider": provider(), "model": MODEL()}
+def MODEL(): return os.getenv("LLM_MODEL") or ("gemini-2.0-flash" if provider() == "gemini" else "gpt-4o-mini")
 
 _svc = _cfg = None
 def _service():
@@ -26,17 +36,17 @@ def _service():
         svc = OpenAIChatCompletion(ai_model_id=MODEL(), api_key=os.environ["OPENAI_API_KEY"])
     k.add_service(svc); _svc, _cfg = svc, S(temperature=0.0); return _svc
 
-async def ask_text(system, user, retries=2):
+async def ask_text(system, user, retries=1):
     from semantic_kernel.contents import ChatHistory
     for i in range(retries):
         try:
             h = ChatHistory(); h.add_system_message(system); h.add_user_message(user)
-            return str(await _service().get_chat_message_content(chat_history=h, settings=_cfg)).strip()
+            res = await asyncio.wait_for(_service().get_chat_message_content(chat_history=h, settings=_cfg), timeout=3.5)
+            return str(res).strip()
         except Exception as e:
-            err_msg = str(e)
-            if "RESOURCE_EXHAUSTED" in err_msg or "daily limit" in err_msg or i == retries - 1:
+            if i == retries - 1:
                 raise
-            await asyncio.sleep(2 * (i + 1))  # free-tier rate limits
+            await asyncio.sleep(0.5)
 
 async def ask_json(system, user):
     t = await ask_text(system + "\nReply with ONE valid JSON object only. No markdown, no commentary.", user)

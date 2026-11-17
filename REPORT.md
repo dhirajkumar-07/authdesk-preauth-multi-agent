@@ -1,8 +1,8 @@
 # AuthDesk: Treatment Pre-Authorisation Decision Desk — Comprehensive Project Report
 
-**Course**: CSE476 Agentic AI and Intelligent Automation — Task 2 (Project 2)  
-**Assessment**: Course Outcomes CO3 & CO4, Bloom's Taxonomy Levels L4 (Analyze), L5 (Evaluate), L6 (Create) — 30 Marks  
-**Project**: Question 24 (Q24), Group 24  
+**System**: Enterprise Multi-Agent Utilization Management Architecture
+**Specification**: Grounded RAG, Parallel Fan-Out/Fan-In, Human-in-the-Loop
+**Project**: AuthDesk Production System  
 **Product Name**: **AuthDesk**  
 **Group Members**:  
 - **Ansh Ojha** (12312163) — Specialized Agents, Grounding & Dual-Collection RAG  

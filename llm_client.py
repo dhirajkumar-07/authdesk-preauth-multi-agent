@@ -10,7 +10,8 @@ load_dotenv()
 def provider() -> str:
     if os.getenv("FORCE_RULES") == "1":
         return None
-    if os.getenv("GEMINI_API_KEY"):
+    key = os.getenv("GEMINI_API_KEY", "")
+    if key and key.startswith("AIzaSy"):
         return "gemini"
     if os.getenv("OPENAI_API_KEY"):
         return "openai"
@@ -22,7 +23,7 @@ def is_llm_available() -> bool:
 def get_model_name() -> str:
     p = provider()
     if p == "gemini":
-        return os.getenv("LLM_MODEL", "gemini-3.5-flash-lite")
+        return os.getenv("LLM_MODEL", "gemini-2.0-flash")
     if p == "openai":
         return os.getenv("LLM_MODEL", "gpt-4o-mini")
     return "Rule-Based Engine (Offline)"
@@ -63,7 +64,7 @@ async def ask_text(system_prompt: str, user_content: str) -> str:
     h = ChatHistory()
     h.add_system_message(system_prompt)
     h.add_user_message(user_content)
-    res = await svc.get_chat_message_content(chat_history=h)
+    res = await asyncio.wait_for(svc.get_chat_message_content(chat_history=h), timeout=3.5)
     return str(res).strip()
 
 async def ask_json(system_prompt: str, user_content: str) -> Dict[str, Any]:

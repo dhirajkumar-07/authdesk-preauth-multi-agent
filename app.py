@@ -126,7 +126,7 @@ else:
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 🕹️ Execution Controls")
 
-col_btn1, col_btn2 = st.sidebar.columns(2)
+col_btn1, col_btn2, col_btn3 = st.sidebar.columns(3)
 
 def reset_pipeline():
     st.session_state.case = CaseRecord(req_text)
@@ -134,7 +134,7 @@ def reset_pipeline():
     st.session_state.step_outputs = {}
     st.session_state.peer_review_done = False
 
-if col_btn1.button("🔄 Reset / Load", use_container_width=True):
+if col_btn1.button("🔄 Reset", use_container_width=True):
     reset_pipeline()
     st.rerun()
 
@@ -145,10 +145,19 @@ if st.session_state.case is None or st.session_state.case.raw_request != req_tex
 auto_play = st.sidebar.checkbox("Auto-play Pipeline", value=False)
 speed = st.sidebar.slider("Step Delay (seconds):", min_value=0.2, max_value=2.0, value=0.6, step=0.2) if auto_play else 0.0
 
-if col_btn2.button("⏭️ Next Step", use_container_width=True, disabled=(st.session_state.current_step >= len(STEPS) - 1 or auto_play)):
+if col_btn2.button("⏭️ Next", use_container_width=True, disabled=(st.session_state.current_step >= len(STEPS) - 1 or auto_play)):
     if st.session_state.current_step < len(STEPS) - 1:
         st.session_state.current_step += 1
         st.rerun()
+
+if col_btn3.button("🚀 Run All", use_container_width=True, type="primary"):
+    with st.spinner("Executing full multi-agent pipeline..."):
+        for s_i in range(len(STEPS)):
+            if s_i not in st.session_state.step_outputs:
+                title, out = asyncio.run(execute_step(s_i, st.session_state.case))
+                st.session_state.step_outputs[s_i] = {"title": title, "data": out}
+        st.session_state.current_step = len(STEPS) - 1
+    st.rerun()
 
 # Main Header
 st.markdown('<div class="main-header">AuthDesk: Treatment Pre-Authorisation Decision Desk</div>', unsafe_allow_html=True)
@@ -160,11 +169,20 @@ pipe_cols = st.columns(len(STEPS))
 for i, step in enumerate(STEPS):
     with pipe_cols[i]:
         if st.session_state.current_step > i:
-            st.success(f"✅ {i+1}. {step['name']}")
+            st.markdown(f"""<div style="background:rgba(52,211,153,0.12); border:1px solid #34D399; border-radius:8px; padding:8px 6px; text-align:center;">
+                <div style="font-weight:700; color:#34D399; font-size:11px;">✓ DONE</div>
+                <div style="font-weight:600; font-size:12px; color:#E2E8F0; margin-top:2px;">{i+1}. {step['name']}</div>
+            </div>""", unsafe_allow_html=True)
         elif st.session_state.current_step == i:
-            st.info(f"👉 {i+1}. {step['name']}")
+            st.markdown(f"""<div style="background:linear-gradient(135deg, rgba(34,211,238,0.25), rgba(99,102,241,0.25)); border:2px solid #22D3EE; border-radius:8px; padding:8px 6px; text-align:center; box-shadow:0 0 16px rgba(34,211,238,0.45);">
+                <div style="font-weight:800; color:#38BDF8; font-size:11px;">⚡ ACTIVE</div>
+                <div style="font-weight:700; font-size:12px; color:#FFFFFF; margin-top:2px;">{i+1}. {step['name']}</div>
+            </div>""", unsafe_allow_html=True)
         else:
-            st.text(f"⚪ {i+1}. {step['name']}")
+            st.markdown(f"""<div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 6px; text-align:center;">
+                <div style="font-weight:600; color:#64748B; font-size:11px;">⚪ QUEUED</div>
+                <div style="font-weight:500; font-size:12px; color:#94A3B8; margin-top:2px;">{i+1}. {step['name']}</div>
+            </div>""", unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -172,7 +190,18 @@ st.markdown("---")
 left_col, right_col = st.columns([3, 2])
 
 with left_col:
-    st.markdown("### 📋 Active Agent Execution Stage")
+    top_c1, top_c2 = st.columns([3, 1])
+    with top_c1:
+        st.markdown("### 📋 Active Agent Execution Stage")
+    with top_c2:
+        if st.button("🚀 Run All Agents", key="run_all_canvas", use_container_width=True, type="primary"):
+            with st.spinner("Executing multi-agent pipeline..."):
+                for s_i in range(len(STEPS)):
+                    if s_i not in st.session_state.step_outputs:
+                        title, out = asyncio.run(execute_step(s_i, st.session_state.case))
+                        st.session_state.step_outputs[s_i] = {"title": title, "data": out}
+                st.session_state.current_step = len(STEPS) - 1
+            st.rerun()
     
     # Run active step if needed
     curr_s = st.session_state.current_step
@@ -195,11 +224,28 @@ with left_col:
             s_out = st.session_state.step_outputs.get(s_idx, {})
             
             is_active = (s_idx == curr_s)
-            card_class = "agent-card step-active" if is_active else "agent-card step-done"
             
             with st.container():
-                st.markdown(f"#### Step {s_idx + 1}: {s_meta['name']}")
-                st.caption(s_meta['desc'])
+                if is_active:
+                    st.markdown(f"""
+                    <div style="background: linear-gradient(90deg, rgba(34, 211, 238, 0.15), rgba(99, 102, 241, 0.15)); border: 2px solid #22d3ee; border-radius: 12px; padding: 14px 18px; margin-bottom: 12px; box-shadow: 0 0 20px rgba(34, 211, 238, 0.35);">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 1.15rem; font-weight: 800; color: #38bdf8;">⚡ Step {s_idx + 1}: {s_meta['name']}</span>
+                        <span style="background: #0284c7; color: #ffffff; padding: 3px 12px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 0 10px #38bdf8;">● ACTIVE AGENT</span>
+                      </div>
+                      <div style="color: #cbd5e1; font-size: 0.85rem; margin-top: 4px;">{s_meta['desc']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                else:
+                    st.markdown(f"""
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(52, 211, 153, 0.4); border-left: 4px solid #34d399; border-radius: 10px; padding: 10px 16px; margin-bottom: 12px;">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 1.05rem; font-weight: 700; color: #e2e8f0;">✓ Step {s_idx + 1}: {s_meta['name']}</span>
+                        <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; padding: 2px 10px; border-radius: 20px; font-weight: 600; font-size: 0.75rem;">COMPLETED</span>
+                      </div>
+                      <div style="color: #64748b; font-size: 0.82rem; margin-top: 2px;">{s_meta['desc']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
                 
                 # Render Step 0: Parser
                 if s_idx == 0:

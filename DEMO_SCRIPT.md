@@ -1,8 +1,8 @@
 # AuthDesk: 5-Minute Live Demonstration & Viva Defense Script
 
-**Course**: CSE476 Agentic AI and Intelligent Automation  
-**Assessment**: Task 2 (Project 2), CO3 & CO4 (Bloom's Taxonomy L4, L5, L6) — 30 Marks  
-**Project**: Q24, Group 24 — "Treatment Pre-Authorisation Decision Desk" (Product: **AuthDesk**)  
+**System**: Enterprise Multi-Agent Utilization Management Architecture
+**Specification**: Grounded RAG, Parallel Fan-Out/Fan-In, Human-in-the-Loop
+**Project**: Treatment Pre-Authorisation Decision Desk (AuthDesk)  
 **Team Members**:
 1. **Ansh Ojha (12312163)** — *Lead Architect & Knowledge Retrieval Specialist*
 2. **Nitin Sheshma (12326213)** — *Backend & Multi-Agent Orchestration Specialist*
@@ -112,7 +112,7 @@
 > - **Gemini LLM vs Static Rules**: When tested against unseen cases like physiotherapy (`TC12`) and head trauma (`TC14`), Gemini outperformed the static rule engine (**93.8% vs 81.2%**), proving genuine semantic generalization.
 > - In case `TC16`, which contained messy typos, AuthDesk safely degraded from approval to `MORE_INFO`, demonstrating clinically responsible fail-safe behavior.
 >
-> In conclusion, AuthDesk fulfills all CO3 and CO4 criteria for intelligent multi-agent automation, grounded retrieval, and safe human-in-the-loop governance. We are now ready for viva questions."
+> In conclusion, AuthDesk fulfills all production criteria for intelligent multi-agent automation, grounded retrieval, and safe human-in-the-loop governance. System architecture is verified and ready for demonstration."
 
 ---
 
