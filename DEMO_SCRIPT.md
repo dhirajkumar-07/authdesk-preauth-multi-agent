@@ -3,26 +3,26 @@
 **System**: Enterprise Multi-Agent Utilization Management Architecture
 **Specification**: Grounded RAG, Parallel Fan-Out/Fan-In, Human-in-the-Loop
 **Project**: Treatment Pre-Authorisation Decision Desk (AuthDesk)  
-**Team Members**:
-1. **Ansh Ojha (12312163)** — *Lead Architect & Knowledge Retrieval Specialist*
-2. **Nitin Sheshma (12326213)** — *Backend & Multi-Agent Orchestration Specialist*
-3. **Dhiraj Kumar (12320690)** — *Full-Stack Integration, Evaluation & Benchmark Specialist*
+**Engineering Roles**:
+1. **Lead Architect & Knowledge Retrieval Specialist** — Dual-Collection ChromaDB Vector Store & Grounding
+2. **Backend & Multi-Agent Orchestration Specialist** — Semantic Kernel Fan-Out/Fan-In Coordination & FastAPI
+3. **Full-Stack Integration, Evaluation & Benchmark Specialist** — Streamlit UI, Web Application & Benchmark Suite
 
 ---
 
 ## Timing & Agenda Overview (5 Minutes Total)
 
 ```
-0:00 - 1:30 (1.5 min) | Speaker 1: Ansh Ojha   | Problem, Grounded Clause RAG & Multi-Agent Design
-1:30 - 3:00 (1.5 min) | Speaker 2: Nitin Sheshma | Fan-Out/Fan-In Orchestration, Human Review & Audit Trail
-3:00 - 4:45 (1.75 min)| Speaker 3: Dhiraj Kumar | Live System Demo (Approve, Deny/Review) & 16-Case Benchmark
-4:45 - 5:00 (0.25 min)| All Three Members       | Conclusion & Viva Defense Readiness
+0:00 - 1:30 (1.5 min) | Part 1: Architecture Lead | Clinical Utilization Challenge, Dual-Vector RAG & Agent Design
+1:30 - 3:00 (1.5 min) | Part 2: Backend Lead      | Fan-Out/Fan-In Orchestration, Peer Review Gate & Audit Ledger
+3:00 - 4:45 (1.75 min)| Part 3: Full-Stack Lead   | Live Case Walkthrough (Approval, Denial Escalation) & Benchmark
+4:45 - 5:00 (0.25 min)| Engineering Team Summary  | Production Verification & Executive Q&A
 ```
 
 ---
 
 ## 🎙️ Part 1: Problem Statement, Knowledge Architecture & Grounded RAG (0:00 – 1:30)
-**Speaker: Ansh Ojha (12312163)**  
+**Presenter: Architecture & Retrieval Lead**  
 *Screen: AuthDesk Landing Page Hero with 3D CSS Core & Architecture Diagram*
 
 ### Speaking Script:
@@ -50,7 +50,7 @@
 ---
 
 ## 🎙️ Part 2: Orchestration, Parallel Fan-Out/Fan-In & Governance (1:30 – 3:00)
-**Speaker: Nitin Sheshma (12326213)**  
+**Presenter: Backend & Orchestration Lead**  
 *Screen: Orchestration Pipeline Diagram & Live Backend Terminal / Swagger Docs (`/docs`)*
 
 ### Speaking Script:
@@ -81,7 +81,7 @@
 ---
 
 ## 🎙️ Part 3: Live Demonstration, Benchmark Evaluation & Viva Defense (3:00 – 5:00)
-**Speaker: Dhiraj Kumar (12320690)**  
+**Presenter: Full-Stack Integration Lead**  
 *Screen: Live Web UI at `http://127.0.0.1:8000` (Aurora Night Theme)*
 
 ### Speaking Script:

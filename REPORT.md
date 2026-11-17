@@ -4,10 +4,10 @@
 **Specification**: Grounded RAG, Parallel Fan-Out/Fan-In, Human-in-the-Loop
 **Project**: AuthDesk Production System  
 **Product Name**: **AuthDesk**  
-**Group Members**:  
-- **Ansh Ojha** (12312163) — Specialized Agents, Grounding & Dual-Collection RAG  
-- **Nitin Sheshma** (12326213) — Parallel Coordination Architecture, Routing & FastAPI  
-- **Dhiraj Kumar** (12320690) — UI Dashboard, Evaluation Benchmark & Final Report  
+**Engineering Architecture**:  
+- **Lead Knowledge Retrieval & Grounding Specialist** — Dual-Collection Vector Store & Semantic Grounding  
+- **Backend & Multi-Agent Orchestration Specialist** — Parallel Coordination Architecture, Routing & FastAPI  
+- **Full-Stack Integration, Evaluation & Benchmark Specialist** — Streamlit UI, Web Application & Benchmark Suite  
 
 ---
 
